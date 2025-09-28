@@ -5,8 +5,9 @@ const MainPage = import('@/pages/MainPage.vue');
 const routes = [
   {
     path: '/',
+    name: 'Login',
     component: MainPage
-  },
+  }
 ];
 
 export const router = createRouter({
