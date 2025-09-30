@@ -1,7 +1,7 @@
 import { createMemoryHistory, createRouter } from "vue-router";
-import { ERouteName } from "@/routeNames.ts";
+import { ERouteName } from "@/consts/routeNames.const.ts";
 
-const MainPage = () => import('@/components/layouts/BaseLayout.vue');
+const MainPage = () => import('@/layouts/BaseLayout.vue');
 const PublicPage = () => import('@/pages/PublicPage.vue');
 const ProtectedPage = () => import('@/pages/ProtectedPage.vue');
 const LoginPage = () => import('@/pages/LoginPage.vue');
