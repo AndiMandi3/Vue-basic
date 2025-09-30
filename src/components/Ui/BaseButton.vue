@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { ref } from "vue";
-
-const loginState = ref('Login');
+defineProps({
+  type: String
+})
 </script>
 
 <template>
   <div class="button-wrapper">
-    <RouterLink to="/">{{ loginState }}</RouterLink>
+    <RouterLink :class="type" :to="'login'"><slot /></RouterLink>
   </div>
 </template>
 
@@ -19,15 +19,15 @@ const loginState = ref('Login');
     background-color: $button-color;
     border: none;
     border-radius: 5px;
-    color: white;
-    font-family: $logo-font;
+    color: $white;
+    font-family: $header-font;
     font-size: 16px;
     transition: 0.3s;
     &:hover{
-      background-color: $button-color-hover;
+      background-color: $link-color-hover;
     }
     &:focus {
-      background-color: $button-color-focus;
+      background-color: $link-color-focus;
     }
   }
 }

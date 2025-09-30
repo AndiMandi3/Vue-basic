@@ -1,12 +1,33 @@
 import { createMemoryHistory, createRouter } from "vue-router";
 
-const MainPage = import('@/pages/MainPage.vue');
+const MainPage = import('@/components/layouts/BaseLayout.vue');
+const PublicPage = import('@/pages/PublicPage.vue');
+const ProtectedPage = import('@/pages/ProtectedPage.vue');
+const LoginPage = import('@/pages/LoginPage.vue');
 
 const routes = [
   {
     path: '/',
-    name: 'Login',
-    component: MainPage
+    name: 'MainLayout',
+    redirect: {name: 'Login'},
+    component: MainPage,
+    children: [
+      {
+        path: '/login',
+        name: 'Login',
+        component: LoginPage
+      },
+      {
+        path: '/public',
+        name: 'public',
+        component: PublicPage
+      },
+      {
+        path: '/protected',
+        name: 'protected',
+        component: ProtectedPage
+      }
+    ]
   }
 ];
 
