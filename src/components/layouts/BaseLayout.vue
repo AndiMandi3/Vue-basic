@@ -1,14 +1,10 @@
 <script setup lang='ts'>
-import HeaderPage from '@/components/HeaderForPage.vue'
+import BaseHeader from '@/components/BaseHeader.vue';
 </script>
 
 <template>
-    <HeaderPage />
+    <BaseHeader />
     <div class="content">
         <RouterView />
     </div>
 </template>
-
-<style scoped lang='scss'>
-
-</style>

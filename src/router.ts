@@ -1,9 +1,10 @@
 import { createMemoryHistory, createRouter } from "vue-router";
+import { ERouteName } from "@/routeNames.ts";
 
-const MainPage = import('@/components/layouts/BaseLayout.vue');
-const PublicPage = import('@/pages/PublicPage.vue');
-const ProtectedPage = import('@/pages/ProtectedPage.vue');
-const LoginPage = import('@/pages/LoginPage.vue');
+const MainPage = () => import('@/components/layouts/BaseLayout.vue');
+const PublicPage = () => import('@/pages/PublicPage.vue');
+const ProtectedPage = () => import('@/pages/ProtectedPage.vue');
+const LoginPage = () => import('@/pages/LoginPage.vue');
 
 const routes = [
   {
@@ -14,17 +15,17 @@ const routes = [
     children: [
       {
         path: '/login',
-        name: 'Login',
+        name: ERouteName.LOGIN_PAGE,
         component: LoginPage
       },
       {
         path: '/public',
-        name: 'public',
+        name: ERouteName.PUBLIC_PAGE,
         component: PublicPage
       },
       {
         path: '/protected',
-        name: 'protected',
+        name: ERouteName.PROTECTED_PAGE,
         component: ProtectedPage
       }
     ]
