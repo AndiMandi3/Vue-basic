@@ -1,6 +1,2 @@
-@use 'reset';
-@use 'fonts';
-
-html {
-  font-family: $default-font;
-}
+@use "reset";
+@use "general";

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 interface IProps {
-  type: 'login' | 'load-more';
+  type: "login" | "load-more";
 }
 
 defineProps<IProps>();
@@ -24,11 +24,11 @@ defineProps<IProps>();
   transition: 0.3s;
 
   &:hover{
-    background-color: $link-color-hover;
+    background-color: $button-color-hover;
   }
 
   &:active {
-    background-color: $link-color-focus;
+    background-color: $button-color-focus;
   }
 }
 </style>

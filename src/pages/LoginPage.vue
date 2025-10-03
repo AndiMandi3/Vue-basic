@@ -1,4 +1,4 @@
-<script setup lang='ts'>
+<script setup lang="ts">
 
 </script>
 
@@ -6,6 +6,6 @@
   <p>Я страница авторизации!</p>
 </template>
 
-<style scoped lang='scss'>
+<style scoped lang="scss">
 
 </style>

@@ -1,10 +1,12 @@
-<script setup lang='ts'>
-import BaseHeader from '@/layouts/BaseHeader.vue';
+<script setup lang="ts">
+import BaseHeader from "@/layouts/components/BaseHeader.vue";
 </script>
 
 <template>
-    <BaseHeader />
-    <div class="content">
-        <RouterView />
+    <div class="base-layout">
+        <BaseHeader />
+        <div class="base-layout__content">
+            <RouterView />
+        </div>
     </div>
 </template>
