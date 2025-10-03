@@ -6,10 +6,10 @@ import { RouteName } from "@/consts/routeNames.const.ts";
 <template>
   <header class="base-header">
     <div class="base-header__pages">
-      <RouterLink class="base-header__pages-link" :to="{name: RouteName.PUBLIC_PAGE}">Public</RouterLink>
-      <RouterLink class="base-header__pages-link" :to="{name: RouteName.PROTECTED_PAGE}">Protected</RouterLink>
+      <RouterLink class="base-header__link" :to="{name: RouteName.PUBLIC_PAGE}">Public</RouterLink>
+      <RouterLink class="base-header__link" :to="{name: RouteName.PROTECTED_PAGE}">Protected</RouterLink>
     </div>
-      <RouterLink :to="{name: RouteName.LOGIN_PAGE}" class="base-header__button-action">
+      <RouterLink :to="{name: RouteName.LOGIN_PAGE}" class="base-header__action">
         <BaseButton type="login">Login</BaseButton>
       </RouterLink>
   </header>
@@ -25,14 +25,15 @@ import { RouteName } from "@/consts/routeNames.const.ts";
   &__pages {
     display: flex;
     align-items: center;
-    &-link {
-      font-size: 20px;
-      padding: 0 10px;
-      color: $link-color;
-    }
   }
 
-  &__button-action {
+  &__link {
+    font-size: 20px;
+    padding: 0 10px;
+    color: $link-color;
+  }
+
+  &__action {
     display: flex;
     align-items: center;
   }
