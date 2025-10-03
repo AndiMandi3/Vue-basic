@@ -30,7 +30,7 @@ import { RouteName } from "@/consts/routeNames.const.ts";
   &__link {
     font-size: 20px;
     padding: 0 10px;
-    color: $link-color;
+    color: $white-color;
   }
 
   &__action {

@@ -1,4 +1,4 @@
-import { createMemoryHistory, createRouter } from "vue-router";
+import { createWebHistory, createRouter } from "vue-router";
 import { RouteName } from "@/consts/routeNames.const.ts";
 
 const MainPage = () => import("@/layouts/BaseLayout.vue");
@@ -9,8 +9,8 @@ const LoginPage = () => import("@/pages/LoginPage.vue");
 const routes = [
   {
     path: "/",
-    name: "MainLayout",
-    redirect: {name: "Login"},
+    name: RouteName.MAIN_LAYOUT,
+    redirect: {name: RouteName.LOGIN_PAGE},
     component: MainPage,
     children: [
       {
@@ -33,6 +33,6 @@ const routes = [
 ];
 
 export const router = createRouter({
-  history: createMemoryHistory(),
+  history: createWebHistory(),
   routes,
 });
