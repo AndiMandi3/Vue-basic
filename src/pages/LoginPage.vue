@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import LoginForm from "@/layouts/forms/LoginForm.vue";
+import LoginForm from "@/components/forms/LoginForm.vue";
 </script>
 
 <template>
   <div class="login-page">
+    <h1 class="login-page__title">Authorization</h1>
     <LoginForm />
   </div>
 </template>
@@ -13,5 +14,11 @@ import LoginForm from "@/layouts/forms/LoginForm.vue";
   min-height: 100vh;
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  &__title {
+    text-align: center;
+  }
 }
 </style>

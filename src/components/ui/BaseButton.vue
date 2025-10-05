@@ -1,6 +1,6 @@
 <script setup lang="ts">
 interface IProps {
-  type: "login" | "load-more";
+  type: "login" | "load-more" | "submit";
 }
 
 defineProps<IProps>();
@@ -30,5 +30,9 @@ defineProps<IProps>();
   &:active {
     background-color: $green-color-focus;
   }
+}
+.submit {
+  margin-top: 10px;
+  background-color: $accent-color;
 }
 </style>
