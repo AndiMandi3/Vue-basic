@@ -1,6 +1,6 @@
 <script setup lang="ts">
 interface IProps {
-  type: "login" | "load-more" | "submit";
+  type: "primary" | "secondary" | "success" | "danger" | "warning" | "muted";
 }
 
 defineProps<IProps>();
@@ -31,8 +31,32 @@ defineProps<IProps>();
     background-color: $green-color-focus;
   }
 }
-.submit {
+
+.primary, .secondary, .success, .danger, .warning, .muted {
   margin-top: 10px;
+}
+
+.primary {
   background-color: $accent-color;
+}
+
+.secondary {
+  background-color: $green-color;
+}
+
+.success {
+  background-color: $accent-color;
+}
+
+.danger {
+  background-color: $danger-color;
+}
+
+.warning {
+  background-color: $warning-color;
+}
+
+.muted {
+  background-color: $disable-color;
 }
 </style>

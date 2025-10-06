@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import { Form, Field, ErrorMessage } from 'vee-validate';
 import { toTypedSchema } from '@vee-validate/zod';
+import { ref } from 'vue';
 import * as zod from 'zod';
 
 import BaseButton from "@/components/ui/BaseButton.vue";
+
+const emailValue = ref("");
+const passwordValue = ref("");
 
 const validationSchema = toTypedSchema(
     zod.object({
@@ -12,30 +16,31 @@ const validationSchema = toTypedSchema(
     })
 );
 
+function onSubmit(values: unknown) {
+  alert(JSON.stringify(values, null, 2));
+}
 </script>
 
 <template>
-  <Form class="login-form" :validationSchema="validationSchema">
+  <Form class="login-form" :validation-schema="validationSchema" @submit="onSubmit">
 
     <div class="login-form__input">
-      <label for="login-form__email">E-Mail:</label>
-      <Field name="email" class="login-form__input-email" type="email" value="" />
+      <label for="email">E-Mail:</label>
+      <Field name="email" class="login-form__input-email" type="email" :value="emailValue" />
       <ErrorMessage class="login-form__error-message" name="email" />
     </div>
     <div class="login-form__input">
-      <label for="login-form__password">Password:</label>
-      <Field name="password" type="password" class="login-form__input-password" value="" />
+      <label for="password">Password:</label>
+      <Field name="password" type="password" class="login-form__input-password" :value="passwordValue" />
       <ErrorMessage class="login-form__error-message" name="password" />
     </div>
 
-    <BaseButton type="submit">Login</BaseButton>
+    <BaseButton type="primary">Login</BaseButton>
   </Form>
 </template>
 
 <style scoped lang="scss">
 .login-form {
-  margin: 0 auto;
-  width: 500px;
   display: flex;
   flex-direction: column;
 
@@ -50,7 +55,7 @@ const validationSchema = toTypedSchema(
     &-email, &-password {
       padding: 10px 0 0 0;
       border: none;
-      border-bottom: 2px solid $gray;
+      border-bottom: 2px solid $gray-color;
       margin-top: 5px;
       font-size: 16px;
 
