@@ -32,31 +32,33 @@ defineProps<IProps>();
   }
 }
 
-.primary, .secondary, .success, .danger, .warning, .muted {
-  margin-top: 10px;
-}
-
 .primary {
   background-color: $accent-color;
+  margin-top: 10px;
 }
 
 .secondary {
   background-color: $green-color;
+  margin-top: 10px;
 }
 
 .success {
   background-color: $accent-color;
+  margin-top: 10px;
 }
 
 .danger {
   background-color: $danger-color;
+  margin-top: 10px;
 }
 
 .warning {
   background-color: $warning-color;
+  margin-top: 10px;
 }
 
 .muted {
   background-color: $disable-color;
+  margin-top: 10px;
 }
 </style>

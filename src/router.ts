@@ -42,6 +42,6 @@ export const router = createRouter({
 });
 
 router.beforeEach((to, _, next) => {
-  document.title =  to.meta.title as string;
+  document.title = to.meta.title as string;
   next();
 });

@@ -25,14 +25,14 @@ function onSubmit(values: unknown) {
   <Form class="login-form" :validation-schema="validationSchema" @submit="onSubmit">
 
     <div class="login-form__input">
-      <label for="email">E-Mail:</label>
-      <Field name="email" class="login-form__input-email" type="email" :value="emailValue" />
-      <ErrorMessage class="login-form__error-message" name="email" />
+      <div>E-Mail:</div>
+      <Field v-model="emailValue" name="email" class="login-form__input-email" type="email"/>
+      <ErrorMessage class="login-form__error" name="email" />
     </div>
     <div class="login-form__input">
-      <label for="password">Password:</label>
-      <Field name="password" type="password" class="login-form__input-password" :value="passwordValue" />
-      <ErrorMessage class="login-form__error-message" name="password" />
+      <div>Password:</div>
+      <Field v-model="passwordValue" name="password" type="password" class="login-form__input-password" />
+      <ErrorMessage class="login-form__error" name="password" />
     </div>
 
     <BaseButton type="primary">Login</BaseButton>
@@ -49,7 +49,7 @@ function onSubmit(values: unknown) {
   }
 
   &__input {
-    display: inherit;
+    display: flex;
     flex-direction: column;
 
     &-email, &-password {
@@ -63,14 +63,10 @@ function onSubmit(values: unknown) {
         outline: none;
         border-color: $accent-color;
       }
-
-      &--error {
-        border-color: $warning-color;
-      }
     }
   }
 
-  &__error-message {
+  &__error {
     margin-top: 5px;
     color: $warning-color;
   }
@@ -79,7 +75,7 @@ function onSubmit(values: unknown) {
     font-size: 16px;
     padding: 10px;
     background-color: $accent-color;
-    color: white;
+    color: $white-color;
     border: none;
     border-radius: 5px;
     transition: 0.3s;
