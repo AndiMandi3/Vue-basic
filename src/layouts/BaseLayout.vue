@@ -12,13 +12,11 @@ import BaseHeader from "@/layouts/components/BaseHeader.vue";
 </template>
 
 <style scoped lang="scss">
-.base-layout {
-  display: flex;
-  flex-direction: column;
-
-  &__content {
-    flex: 1;
-    display: flex;
-  }
-}
+    .base-layout {
+        height: 100%;
+        
+        &__content {
+            height: 100%;
+        }
+    }
 </style>

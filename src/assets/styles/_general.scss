@@ -1,4 +1,7 @@
 @use "vars" as *;
+html, body, #app {
+  height: 100%;
+}
 
 html {
   font-family: $default-font;

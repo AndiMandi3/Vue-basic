@@ -11,12 +11,12 @@ import LoginForm from "@/components/forms/LoginForm.vue";
 
 <style scoped lang="scss">
 .login-page {
-  margin: auto;
-  display: grid;
-  place-items: center;
-  gap: 16px;
-  padding: 24px;
-
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
   &__title {
     text-align: center;
   }
