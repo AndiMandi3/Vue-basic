@@ -1,13 +1,9 @@
 <script setup lang="ts">
-import { Form, Field, ErrorMessage } from 'vee-validate';
-import { toTypedSchema } from '@vee-validate/zod';
-import { ref } from 'vue';
-import * as zod from 'zod';
+import { Form, Field, ErrorMessage } from "vee-validate";
+import { toTypedSchema } from "@vee-validate/zod";
+import * as zod from "zod";
 
 import BaseButton from "@/components/ui/BaseButton.vue";
-
-const emailValue = ref("");
-const passwordValue = ref("");
 
 const validationSchema = toTypedSchema(
     zod.object({
@@ -26,12 +22,12 @@ function onSubmit(values: unknown) {
 
     <div class="login-form__input">
       <div>E-Mail:</div>
-      <Field v-model="emailValue" name="email" class="login-form__input-email" type="email"/>
+      <Field name="email" class="login-form__input-email" type="email"/>
       <ErrorMessage class="login-form__error" name="email" />
     </div>
     <div class="login-form__input">
       <div>Password:</div>
-      <Field v-model="passwordValue" name="password" type="password" class="login-form__input-password" />
+      <Field name="password" type="password" class="login-form__input-password" />
       <ErrorMessage class="login-form__error" name="password" />
     </div>
 

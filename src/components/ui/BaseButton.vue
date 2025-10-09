@@ -23,42 +23,43 @@ defineProps<IProps>();
   font-size: 16px;
   transition: 0.3s;
 
+  &.primary {
+    background-color: $accent-color;
+    margin-top: 10px;
+  }
+
+  &.secondary {
+    background-color: $green-color;
+    margin-top: 10px;
+  }
+
+  &.success {
+    background-color: $accent-color;
+    margin-top: 10px;
+  }
+
+  &.danger {
+    background-color: $danger-color;
+    margin-top: 10px;
+  }
+
+  &.warning {
+    background-color: $warning-color;
+    margin-top: 10px;
+  }
+
+  &.muted {
+    background-color: $disable-color;
+    margin-top: 10px;
+  }
+
   &:hover{
-    background-color: $green-color-hover;
+    opacity: 50%;
   }
 
   &:active {
-    background-color: $green-color-focus;
+    opacity: 75%;
   }
 }
 
-.primary {
-  background-color: $accent-color;
-  margin-top: 10px;
-}
-
-.secondary {
-  background-color: $green-color;
-  margin-top: 10px;
-}
-
-.success {
-  background-color: $accent-color;
-  margin-top: 10px;
-}
-
-.danger {
-  background-color: $danger-color;
-  margin-top: 10px;
-}
-
-.warning {
-  background-color: $warning-color;
-  margin-top: 10px;
-}
-
-.muted {
-  background-color: $disable-color;
-  margin-top: 10px;
-}
 </style>
