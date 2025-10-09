@@ -1,18 +1,15 @@
-export const RouteConfig = {
-    MAIN_LAYOUT: {
-        name: "MainLayout",
-        title: "Default page",
-    },
-    LOGIN_PAGE: {
-        name: "Login",
-        title: "Авторизация",
-    },
-    PUBLIC_PAGE: {
-        name: "Public",
-        title: "Публичная страница",
-    },
-    PROTECTED_PAGE: {
-        name: "Protected",
-        title: "Защищенная страница",
-    }
+const RouteName = {
+  MAIN_LAYOUT: "MainLayout",
+  LOGIN_PAGE: "Login",
+  PUBLIC_PAGE: "Public",
+  PROTECTED_PAGE: "Protected" 
 } as const;
+
+const RouteTitle = {
+  MAIN_LAYOUT: "Default page",
+  LOGIN_PAGE: "Авторизация",
+  PUBLIC_PAGE: "Публичная страница",
+  PROTECTED_PAGE: "Защищенная страница" 
+} as const;
+
+export { RouteName, RouteTitle }

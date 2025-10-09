@@ -1,5 +1,5 @@
 import { createWebHistory, createRouter } from "vue-router";
-import { RouteConfig } from "@/consts/router.const.ts";
+import { RouteName, RouteTitle } from "@/consts/router.const.ts";
 
 const MainPage = () => import("@/layouts/BaseLayout.vue");
 const PublicPage = () => import("@/pages/PublicPage.vue");
@@ -9,27 +9,27 @@ const LoginPage = () => import("@/pages/LoginPage.vue");
 const routes = [
   {
     path: "/",
-    name: RouteConfig.MAIN_LAYOUT.name,
-    redirect: {name: RouteConfig.LOGIN_PAGE.name},
+    name: RouteName.MAIN_LAYOUT,
+    redirect: { name: RouteName.LOGIN_PAGE },
     component: MainPage,
     children: [
       {
         path: "/login",
-        name: RouteConfig.LOGIN_PAGE.name,
+        name: RouteName.LOGIN_PAGE,
         component: LoginPage,
-        meta: {title: RouteConfig.LOGIN_PAGE.title}
+        meta: { title: RouteTitle.LOGIN_PAGE }
       },
       {
         path: "/public",
-        name: RouteConfig.PUBLIC_PAGE.name,
+        name: RouteName.PUBLIC_PAGE,
         component: PublicPage,
-        meta: {title: RouteConfig.PUBLIC_PAGE.title}
+        meta: { title: RouteTitle.PUBLIC_PAGE }
       },
       {
         path: "/protected",
-        name: RouteConfig.PROTECTED_PAGE.name,
+        name: RouteName.PROTECTED_PAGE,
         component: ProtectedPage,
-        meta: {title: RouteConfig.PROTECTED_PAGE.title}
+        meta: { title: RouteTitle.PROTECTED_PAGE }
       }
     ]
   }
