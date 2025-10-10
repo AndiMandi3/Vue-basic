@@ -37,8 +37,5 @@ import { RouteName } from "@/consts/router.const.ts";
     display: flex;
     align-items: center;
   }
-  .secondary {
-    margin: 0;
-  }
 }
 </style>

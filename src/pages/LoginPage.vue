@@ -17,6 +17,7 @@ import LoginForm from "@/components/forms/LoginForm.vue";
   width: 100%;
   justify-content: center;
   align-items: center;
+  gap: 20px;
   &__title {
     text-align: center;
   }

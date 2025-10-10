@@ -22,7 +22,6 @@ defineProps<IProps>();
   color: $white-color;
   font-size: 16px;
   transition: 0.3s;
-  margin-top: 10px;
 
   &.primary {
     background-color: $accent-color;

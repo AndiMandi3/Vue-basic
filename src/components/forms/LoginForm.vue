@@ -39,10 +39,7 @@ function onSubmit(values: unknown) {
 .login-form {
   display: flex;
   flex-direction: column;
-
-  &__input, &__submit {
-    margin-top: 20px;
-  }
+  gap: 10px;
 
   &__input {
     display: flex;
@@ -52,7 +49,6 @@ function onSubmit(values: unknown) {
       padding: 10px 0 0 0;
       border: none;
       border-bottom: 2px solid $gray-color;
-      margin-top: 5px;
       font-size: 16px;
 
       &:focus {
@@ -63,7 +59,6 @@ function onSubmit(values: unknown) {
   }
 
   &__error {
-    margin-top: 5px;
     color: $danger-color;
   }
 
