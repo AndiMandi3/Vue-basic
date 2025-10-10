@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import BaseButton from "@/components/ui/BaseButton.vue";
-import { RouteName } from "@/consts/routeNames.const.ts";
+import { RouteName } from "@/consts/router.const.ts";
 </script>
 
 <template>
@@ -10,7 +10,7 @@ import { RouteName } from "@/consts/routeNames.const.ts";
       <RouterLink class="base-header__link" :to="{name: RouteName.PROTECTED_PAGE}">Protected</RouterLink>
     </div>
       <RouterLink :to="{name: RouteName.LOGIN_PAGE}" class="base-header__action">
-        <BaseButton type="login">Login</BaseButton>
+        <BaseButton type="secondary">Login</BaseButton>
       </RouterLink>
   </header>
 </template>

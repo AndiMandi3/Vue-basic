@@ -1,6 +1,6 @@
 <script setup lang="ts">
 interface IProps {
-  type: "login" | "load-more";
+  type: "primary" | "secondary" | "success" | "danger" | "warning" | "muted";
 }
 
 defineProps<IProps>();
@@ -23,12 +23,37 @@ defineProps<IProps>();
   font-size: 16px;
   transition: 0.3s;
 
+  &.primary {
+    background-color: $accent-color;
+  }
+
+  &.secondary {
+    background-color: $green-color;
+  }
+
+  &.success {
+    background-color: $accent-color;
+  }
+
+  &.danger {
+    background-color: $danger-color;
+  }
+
+  &.warning {
+    background-color: $warning-color;
+  }
+
+  &.muted {
+    background-color: $disable-color;
+  }
+
   &:hover{
-    background-color: $green-color-hover;
+    opacity: 50%;
   }
 
   &:active {
-    background-color: $green-color-focus;
+    opacity: 75%;
   }
 }
+
 </style>
