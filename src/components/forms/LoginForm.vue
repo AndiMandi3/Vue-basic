@@ -28,6 +28,7 @@ function onSubmit(values: unknown) {
     <div class="login-form__input">
       <div>Password:</div>
       <Field name="password" type="password" class="login-form__input-password" />
+   
       <ErrorMessage class="login-form__error" name="password" />
     </div>
 
@@ -44,6 +45,7 @@ function onSubmit(values: unknown) {
   &__input {
     display: flex;
     flex-direction: column;
+    position: relative;
 
     &-email, &-password {
       padding: 10px 0 0 0;
@@ -56,6 +58,16 @@ function onSubmit(values: unknown) {
         border-color: $accent-color;
       }
     }
+
+    &-password {
+      padding-right: 32px;
+    }
+  }
+
+  &__password-eye {
+    position: absolute;
+    top: 10px;
+    right: 10px;
   }
 
   &__error {
