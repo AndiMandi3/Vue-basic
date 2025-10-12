@@ -47,6 +47,16 @@ defineProps<IProps>();
     background-color: $disable-color;
   }
 
+  &:disabled {
+    background-color: $disable-color;
+    &:hover {
+      opacity: 1;
+    }
+    &:active {
+      opacity: 1;
+    }
+  }
+
   &:hover{
     opacity: 50%;
   }

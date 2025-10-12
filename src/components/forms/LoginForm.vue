@@ -1,46 +1,91 @@
 <script setup lang="ts">
-import { Form, Field, ErrorMessage } from "vee-validate";
+import { computed, ref } from "vue";
+import { useCounterStore } from "@/stores/useCounterStore.ts";
+import { useField, useForm } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
 import * as zod from "zod";
 
 import BaseButton from "@/components/ui/BaseButton.vue";
 
+import OpenedEyePassword from "@/assets/images/eye-password-show.svg?component";
+import ClosedEyePassword from "@/assets/images/eye-password-hidden.svg?component";
+
 const validationSchema = toTypedSchema(
     zod.object({
-      email: zod.string().min(1, { message: "This is required" }).email({ message: "Must be a valid email" }),
-      password: zod.string().min(1, { message: "This is required" }).min(8, { message: "Too short" }),
+      email: zod.string().min(1, { message: "Это обязательное поле" }).email({ message: "Некорректный E-mail" }),
+      password: zod.string().min(1, { message: "Это обязательное поле" }).min(8, { message: "Пароль должен быть минимум 8 символов" }),
     })
 );
 
-function onSubmit(values: unknown) {
+const storeCounter = useCounterStore();
+
+const { handleSubmit, errors, meta } = useForm({ validationSchema });
+
+const { value: email, meta: emailMeta } = useField('email');
+const { value: password, meta: passwordMeta } = useField('password');
+
+const onSubmit = handleSubmit(values => {
   alert(JSON.stringify(values, null, 2));
+});
+
+const isOpenEye = ref(true);
+const fieldPassType = computed(() => isOpenEye.value ? 'password' : 'text');
+
+function onChangePassVisibility(): void {
+  isOpenEye.value = !isOpenEye.value;
 }
+
+
 </script>
 
 <template>
-  <Form class="login-form" :validation-schema="validationSchema" @submit="onSubmit">
+  <form class="login-form" @submit="onSubmit">
 
     <div class="login-form__input">
       <div>E-Mail:</div>
-      <Field name="email" class="login-form__input-email" type="email"/>
-      <ErrorMessage class="login-form__error" name="email" />
-    </div>
-    <div class="login-form__input">
-      <div>Password:</div>
-      <Field name="password" type="password" class="login-form__input-password" />
-   
-      <ErrorMessage class="login-form__error" name="password" />
+      <input
+        v-model="email"
+        name="email"
+        class="login-form__input-email"
+        type="email"
+        :class="{'is-invalid': !emailMeta.valid}"
+      />
+      <span class="login-form__error">{{ errors.email }}</span>
     </div>
 
-    <BaseButton type="primary">Login</BaseButton>
-  </Form>
+    <div class="login-form__input">
+      <div>Password:</div>
+      <input
+        v-model="password"
+        :type="fieldPassType"
+        name="password"
+        class="login-form__input-password"
+        :class="{'is-invalid': !passwordMeta.valid}"
+      />
+      <span class="login-form__error">{{ errors.password }}</span>
+
+      <OpenedEyePassword v-if="isOpenEye" class="login-form__password-eye" @click="onChangePassVisibility" />
+      <ClosedEyePassword v-else class="login-form__password-eye" @click="onChangePassVisibility" />
+    </div>
+
+    <BaseButton
+      :disabled="!meta.valid"
+      type="primary"
+    >
+      Login
+    </BaseButton>
+  </form>
+  <button @click="() => storeCounter.increment()">
+    {{ storeCounter.count }}
+  </button>
+
 </template>
 
 <style scoped lang="scss">
 .login-form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
 
   &__input {
     display: flex;
@@ -57,6 +102,10 @@ function onSubmit(values: unknown) {
         outline: none;
         border-color: $accent-color;
       }
+
+      &.is-invalid {
+        border-color: $danger-color;
+      }
     }
 
     &-password {
@@ -68,6 +117,10 @@ function onSubmit(values: unknown) {
     position: absolute;
     top: 10px;
     right: 10px;
+    cursor: pointer;
+    padding: 4px;
+    width: 30px;
+    height: 30px;
   }
 
   &__error {

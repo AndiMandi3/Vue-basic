@@ -1,15 +1,10 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import OpenedEyePassword from "@/assets/images/eye-password-show.svg?component";
-import ClosedEyePassword from "@/assets/images/eye-password-hidden.svg?component";
 
-interface IProps {
-  type: "text" | "password",
-};
+const isOpen = defineModel<boolean>();
 
-defineProps<IProps>();
-
-
+function onChangeEye() {
+  isOpen.value = !isOpen.value;
+}
 
 </script>
 
@@ -17,19 +12,11 @@ defineProps<IProps>();
   <button
   type="button"
   class="eye-toggle">
-  <OpenedEyePassword class="eye-toggle__icon"/>
+    <OpenedEyePassword v-if="isOpen" class="eye-toggle__icon" @click="onChangeEye" />
+    <ClosedEyePassword v-else class="eye-toggle__icon" @click="onChangeEye" />
   </button>
 </template>
 
 <style scoped lang="scss">
-.eye-toggle {
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  padding: 4px;
-  &__icon {
-    width: 24px;
-    height: 24px;
-  }
-}
+
 </style>
