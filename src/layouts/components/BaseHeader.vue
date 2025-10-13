@@ -1,6 +1,10 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import BaseButton from "@/components/ui/BaseButton.vue";
 import { RouteName } from "@/consts/router.const.ts";
+
+const isAuth = ref(false);
+
 </script>
 
 <template>
@@ -9,7 +13,10 @@ import { RouteName } from "@/consts/router.const.ts";
       <RouterLink class="base-header__link" :to="{name: RouteName.PUBLIC_PAGE}">Public</RouterLink>
       <RouterLink class="base-header__link" :to="{name: RouteName.PROTECTED_PAGE}">Protected</RouterLink>
     </div>
-      <RouterLink :to="{name: RouteName.LOGIN_PAGE}" class="base-header__action">
+      <RouterLink v-if="!isAuth" :to="{name: RouteName.LOGIN_PAGE}" class="base-header__action">
+        <BaseButton type="secondary">Login</BaseButton>
+      </RouterLink>
+      <RouterLink v-else :to="{name: RouteName.LOGIN_PAGE}" class="base-header__action">
         <BaseButton type="secondary">Login</BaseButton>
       </RouterLink>
   </header>

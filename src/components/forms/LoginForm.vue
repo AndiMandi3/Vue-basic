@@ -3,12 +3,14 @@ import { computed, ref } from "vue";
 import { useCounterStore } from "@/stores/useCounterStore.ts";
 import { useField, useForm } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
+import CookieHelper from "@/classes/cookieHelper.class"
 import * as zod from "zod";
 
 import BaseButton from "@/components/ui/BaseButton.vue";
 
 import OpenedEyePassword from "@/assets/images/eye-password-show.svg?component";
 import ClosedEyePassword from "@/assets/images/eye-password-hidden.svg?component";
+import { router } from "@/router";
 
 const validationSchema = toTypedSchema(
     zod.object({
@@ -24,14 +26,15 @@ const { handleSubmit, errors, meta } = useForm({ validationSchema });
 const { value: email, meta: emailMeta } = useField('email');
 const { value: password, meta: passwordMeta } = useField('password');
 
-const onSubmit = handleSubmit(values => {
-  alert(JSON.stringify(values, null, 2));
+const onSubmit = handleSubmit(() => {
+  CookieHelper.setCookie('isAuth', "true", 1)
+  router.push('/public');
 });
 
 const isOpenEye = ref(true);
 const fieldPassType = computed(() => isOpenEye.value ? 'password' : 'text');
 
-function onChangePassVisibility(): void {
+function onChangePassVisibility() {
   isOpenEye.value = !isOpenEye.value;
 }
 

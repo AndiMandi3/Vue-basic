@@ -1,5 +1,6 @@
 import { createWebHistory, createRouter } from "vue-router";
 import { RouteName, RouteTitle } from "@/consts/router.const.ts";
+import CookieHelper from "@/classes/cookieHelper.class";
 
 const MainPage = () => import("@/layouts/BaseLayout.vue");
 const PublicPage = () => import("@/pages/PublicPage.vue");
@@ -29,7 +30,10 @@ const routes = [
         path: "/protected",
         name: RouteName.PROTECTED_PAGE,
         component: ProtectedPage,
-        meta: { title: RouteTitle.PROTECTED_PAGE }
+        meta: { 
+          title: RouteTitle.PROTECTED_PAGE,
+          requiresAuth: true,
+        }
       }
     ]
   }
@@ -40,7 +44,12 @@ export const router = createRouter({
   routes,
 });
 
-router.beforeEach((to, _, next) => {
+router.beforeEach((to) => {
   document.title = to.meta.title as string;
-  next();
+  if(to.meta.requiresAuth && CookieHelper.getCookie('isAuth')) {
+    return {
+      path: "/login",
+      query: { redirect: to.fullPath }
+    }
+  }
 });
