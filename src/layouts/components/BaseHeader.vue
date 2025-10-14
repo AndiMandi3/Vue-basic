@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import BaseButton from "@/components/ui/BaseButton.vue";
 import { RouteName } from "@/consts/router.const.ts";
+import useAuth from "@/helpers/useAuth.helper";
 
-const isAuth = ref(false);
-
+const { isAuth } = useAuth();
 </script>
 
 <template>
@@ -17,7 +16,7 @@ const isAuth = ref(false);
         <BaseButton type="secondary">Login</BaseButton>
       </RouterLink>
       <RouterLink v-else :to="{name: RouteName.LOGIN_PAGE}" class="base-header__action">
-        <BaseButton type="secondary">Login</BaseButton>
+        <BaseButton type="secondary">Logout</BaseButton>
       </RouterLink>
   </header>
 </template>

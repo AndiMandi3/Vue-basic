@@ -1,6 +1,6 @@
 import { createWebHistory, createRouter } from "vue-router";
 import { RouteName, RouteTitle } from "@/consts/router.const.ts";
-import CookieHelper from "@/classes/cookieHelper.class";
+import useAuth from "@/helpers/useAuth.helper"
 
 const MainPage = () => import("@/layouts/BaseLayout.vue");
 const PublicPage = () => import("@/pages/PublicPage.vue");
@@ -44,12 +44,7 @@ export const router = createRouter({
   routes,
 });
 
-router.beforeEach((to) => {
+router.beforeEach((to, _, next) => {
   document.title = to.meta.title as string;
-  if(to.meta.requiresAuth && CookieHelper.getCookie('isAuth')) {
-    return {
-      path: "/login",
-      query: { redirect: to.fullPath }
-    }
-  }
+  next();
 });

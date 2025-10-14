@@ -3,14 +3,13 @@ import { computed, ref } from "vue";
 import { useCounterStore } from "@/stores/useCounterStore.ts";
 import { useField, useForm } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
-import CookieHelper from "@/classes/cookieHelper.class"
+import useAuth from "@/helpers/useAuth.helper"
 import * as zod from "zod";
 
 import BaseButton from "@/components/ui/BaseButton.vue";
 
 import OpenedEyePassword from "@/assets/images/eye-password-show.svg?component";
 import ClosedEyePassword from "@/assets/images/eye-password-hidden.svg?component";
-import { router } from "@/router";
 
 const validationSchema = toTypedSchema(
     zod.object({
@@ -18,6 +17,8 @@ const validationSchema = toTypedSchema(
       password: zod.string().min(1, { message: "Это обязательное поле" }).min(8, { message: "Пароль должен быть минимум 8 символов" }),
     })
 );
+
+const { setAuth } = useAuth();
 
 const storeCounter = useCounterStore();
 
@@ -27,8 +28,7 @@ const { value: email, meta: emailMeta } = useField('email');
 const { value: password, meta: passwordMeta } = useField('password');
 
 const onSubmit = handleSubmit(() => {
-  CookieHelper.setCookie('isAuth', "true", 1)
-  router.push('/public');
+  setAuth(true);
 });
 
 const isOpenEye = ref(true);
