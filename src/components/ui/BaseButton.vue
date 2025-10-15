@@ -4,7 +4,6 @@ interface IProps {
 }
 
 defineProps<IProps>();
-
 </script>
 
 <template>

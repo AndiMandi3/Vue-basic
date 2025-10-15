@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import { useRouter, useRoute } from "vue-router"
-import { useCounterStore } from "@/stores/useCounterStore.ts";
 import { useField, useForm } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
 import { RouteName } from "@/consts/router.const.ts";
@@ -25,8 +24,6 @@ const route = useRoute();
 
 const { setAuth } = useAuth();
 
-const storeCounter = useCounterStore();
-
 const { handleSubmit, errors, meta } = useForm({ validationSchema });
 
 const { value: email, meta: emailMeta } = useField("email");
@@ -44,8 +41,6 @@ const fieldPassType = computed(() => isOpenEye.value ? "password" : "text");
 function onChangePassVisibility() {
   isOpenEye.value = !isOpenEye.value;
 }
-
-
 </script>
 
 <template>
@@ -85,9 +80,6 @@ function onChangePassVisibility() {
       Login
     </BaseButton>
   </form>
-  <button @click="() => storeCounter.increment()">
-    {{ storeCounter.count }}
-  </button>
 
 </template>
 

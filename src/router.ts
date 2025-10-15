@@ -47,13 +47,19 @@ export const router = createRouter({
   routes,
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _, next) => {
   document.title = to.meta.title as string;
   const isAuthenticated = CookieHelper.getCookie('isAuth') !== undefined;
 
-  if(to.name !== RouteName.LOGIN_PAGE && to.meta.requiresAuth && !isAuthenticated) {
-    return next({ name: RouteName.LOGIN_PAGE, query: from?.name ? { redirect: from.name } : null });
-  } 
+  if(to.meta.requiresAuth && !isAuthenticated) {
+    const redirectPageName = (to?.name || RouteName.MAIN_LAYOUT) as string;
+
+    return next({
+      name: RouteName.LOGIN_PAGE,
+      query:  { redirect: redirectPageName },
+    });
+  }
+
   if (to.name === RouteName.LOGIN_PAGE && isAuthenticated) {
     return next({ name: RouteName.PUBLIC_PAGE });
   }

@@ -1,11 +1,9 @@
 <script setup lang="ts">
-
 const isOpen = defineModel<boolean>();
 
 function onChangeEye() {
   isOpen.value = !isOpen.value;
 }
-
 </script>
 
 <template>
