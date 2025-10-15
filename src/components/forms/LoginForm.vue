@@ -18,7 +18,7 @@ const validationSchema = toTypedSchema(
     })
 );
 
-const { setAuth } = useAuth();
+const { checkAuth, setAuth } = useAuth();
 
 const storeCounter = useCounterStore();
 
@@ -28,7 +28,7 @@ const { value: email, meta: emailMeta } = useField('email');
 const { value: password, meta: passwordMeta } = useField('password');
 
 const onSubmit = handleSubmit(() => {
-  setAuth(true);
+  setAuth();
 });
 
 const isOpenEye = ref(true);
