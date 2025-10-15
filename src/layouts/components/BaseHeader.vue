@@ -3,7 +3,7 @@ import BaseButton from "@/components/ui/BaseButton.vue";
 import { RouteName } from "@/consts/router.const.ts";
 import useAuth from "@/helpers/useAuth.helper";
 
-const { isAuth, authValueComputed, removeAuth } = useAuth();
+const { isAuth, removeAuth } = useAuth();
 </script>
 
 <template>
@@ -12,7 +12,7 @@ const { isAuth, authValueComputed, removeAuth } = useAuth();
       <RouterLink class="base-header__link" :to="{name: RouteName.PUBLIC_PAGE}">Public</RouterLink>
       <RouterLink class="base-header__link" :to="{name: RouteName.PROTECTED_PAGE}">Protected</RouterLink>
     </div>
-      <RouterLink v-if="!authValueComputed" :to="{name: RouteName.LOGIN_PAGE}" class="base-header__action">
+      <RouterLink v-if="!isAuth" :to="{name: RouteName.LOGIN_PAGE}" class="base-header__action">
         <BaseButton type="secondary">Login</BaseButton>
       </RouterLink>
       <RouterLink v-else :to="{name: RouteName.LOGIN_PAGE}" class="base-header__action">

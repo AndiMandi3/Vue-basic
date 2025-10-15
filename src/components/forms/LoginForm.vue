@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
+import { useRouter, useRoute } from "vue-router"
 import { useCounterStore } from "@/stores/useCounterStore.ts";
 import { useField, useForm } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
+import { RouteName } from "@/consts/router.const.ts";
 import useAuth from "@/helpers/useAuth.helper"
 import * as zod from "zod";
 
@@ -18,21 +20,26 @@ const validationSchema = toTypedSchema(
     })
 );
 
-const { checkAuth, setAuth } = useAuth();
+const router = useRouter();
+const route = useRoute();
+
+const { setAuth } = useAuth();
 
 const storeCounter = useCounterStore();
 
 const { handleSubmit, errors, meta } = useForm({ validationSchema });
 
-const { value: email, meta: emailMeta } = useField('email');
-const { value: password, meta: passwordMeta } = useField('password');
+const { value: email, meta: emailMeta } = useField("email");
+const { value: password, meta: passwordMeta } = useField("password");
 
 const onSubmit = handleSubmit(() => {
   setAuth();
+
+  router.push({ name: route.query?.redirect as string || RouteName.PUBLIC_PAGE });
 });
 
 const isOpenEye = ref(true);
-const fieldPassType = computed(() => isOpenEye.value ? 'password' : 'text');
+const fieldPassType = computed(() => isOpenEye.value ? "password" : "text");
 
 function onChangePassVisibility() {
   isOpenEye.value = !isOpenEye.value;
