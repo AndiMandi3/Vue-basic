@@ -11,7 +11,7 @@ const routes = [
   {
     path: "/",
     name: RouteName.MAIN_LAYOUT,
-    redirect: { name: RouteName.LOGIN_PAGE },
+    redirect: {  name: RouteName.LOGIN_PAGE  },
     component: MainPage,
     children: [
       {
