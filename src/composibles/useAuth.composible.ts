@@ -1,5 +1,5 @@
 import { ref, onMounted, computed } from "vue";
-import CookieHelper from "./cookie.helper";
+import CookieHelper from "../helpers/cookie.helper";
 
 const isAuthValue = ref(false);
 
@@ -10,10 +10,8 @@ export default function useAuth() {
     const checkAuth = () => {
         const authCookie = CookieHelper.getCookie('isAuth');
 
-        if(authCookie && authCookie !== 'false') {
+        if(authCookie) {
             isAuthValue.value = true;
-        } else {
-            isAuthValue.value = false;
         }
     }
 

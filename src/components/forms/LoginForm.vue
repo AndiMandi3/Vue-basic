@@ -4,13 +4,14 @@ import { useRouter, useRoute } from "vue-router"
 import { useField, useForm } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
 import { RouteName } from "@/consts/router.const.ts";
-import useAuth from "@/helpers/useAuth.helper"
+import useAuth from "@/composibles/useAuth.composible"
 import * as zod from "zod";
 
 import BaseButton from "@/components/ui/BaseButton.vue";
+import BaseInput from "@/components/ui/BaseInput.vue";
 
-import OpenedEyePassword from "@/assets/images/eye-password-show.svg?component";
-import ClosedEyePassword from "@/assets/images/eye-password-hidden.svg?component";
+import OpenedEyePassword from "@/assets/images/eye-show-icon.svg?component";
+import ClosedEyePassword from "@/assets/images/eye-hidden-icon.svg?component";
 
 const validationSchema = toTypedSchema(
     zod.object({
@@ -18,6 +19,9 @@ const validationSchema = toTypedSchema(
       password: zod.string().min(1, { message: "Это обязательное поле" }).min(8, { message: "Пароль должен быть минимум 8 символов" }),
     })
 );
+
+const isPasswordHidden = ref(true);
+const fieldPassType = computed(() => isPasswordHidden.value ? "password" : "text");
 
 const router = useRouter();
 const route = useRoute();
@@ -31,15 +35,11 @@ const { value: password, meta: passwordMeta } = useField("password");
 
 const onSubmit = handleSubmit(() => {
   setAuth();
-
   router.push({ name: route.query?.redirect as string || RouteName.PUBLIC_PAGE });
 });
 
-const isOpenEye = ref(true);
-const fieldPassType = computed(() => isOpenEye.value ? "password" : "text");
-
 function onChangePassVisibility() {
-  isOpenEye.value = !isOpenEye.value;
+  isPasswordHidden.value = !isPasswordHidden.value;
 }
 </script>
 
@@ -48,11 +48,17 @@ function onChangePassVisibility() {
 
     <div class="login-form__input">
       <div>E-Mail:</div>
-      <input
+      <!-- <input
         v-model="email"
         name="email"
         class="login-form__input-email"
         type="email"
+        :class="{'is-invalid': !emailMeta.valid}"
+      /> -->
+      <BaseInput
+        v-model="email" 
+        input-type="email"
+        input-name="email"
         :class="{'is-invalid': !emailMeta.valid}"
       />
       <span class="login-form__error">{{ errors.email }}</span>
@@ -60,17 +66,23 @@ function onChangePassVisibility() {
 
     <div class="login-form__input">
       <div>Password:</div>
-      <input
+      <!-- <input
         v-model="password"
         :type="fieldPassType"
         name="password"
         class="login-form__input-password"
         :class="{'is-invalid': !passwordMeta.valid}"
+      /> -->
+      <BaseInput 
+        v-model="password"
+        :input-type="fieldPassType"
+        input-name="password"
+        :class="{'is-invalid': !passwordMeta.valid}"
       />
-      <span class="login-form__error">{{ errors.password }}</span>
-
-      <OpenedEyePassword v-if="isOpenEye" class="login-form__password-eye" @click="onChangePassVisibility" />
+      <OpenedEyePassword v-if="isPasswordHidden" class="login-form__password-eye" @click="onChangePassVisibility" />
       <ClosedEyePassword v-else class="login-form__password-eye" @click="onChangePassVisibility" />
+      
+      <span class="login-form__error">{{ errors.password }}</span>
     </div>
 
     <BaseButton
@@ -93,26 +105,6 @@ function onChangePassVisibility() {
     display: flex;
     flex-direction: column;
     position: relative;
-
-    &-email, &-password {
-      padding: 10px 0 0 0;
-      border: none;
-      border-bottom: 2px solid $gray-color;
-      font-size: 16px;
-
-      &:focus {
-        outline: none;
-        border-color: $accent-color;
-      }
-
-      &.is-invalid {
-        border-color: $danger-color;
-      }
-    }
-
-    &-password {
-      padding-right: 32px;
-    }
   }
 
   &__password-eye {

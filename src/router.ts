@@ -19,9 +19,8 @@ const routes = [
         name: RouteName.LOGIN_PAGE,
         component: LoginPage,
         meta: { 
-          title: RouteTitle.LOGIN_PAGE,
-
-         }
+          title: RouteTitle.LOGIN_PAGE
+        }
       },
       {
         path: "/public",
@@ -49,7 +48,7 @@ export const router = createRouter({
 
 router.beforeEach((to, _, next) => {
   document.title = to.meta.title as string;
-  const isAuthenticated = CookieHelper.getCookie('isAuth') !== undefined;
+  const isAuthenticated = CookieHelper.getCookie('isAuth') != null;
 
   if(to.meta.requiresAuth && !isAuthenticated) {
     const redirectPageName = (to?.name || RouteName.MAIN_LAYOUT) as string;

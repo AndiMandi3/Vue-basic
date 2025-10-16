@@ -1,9 +1,17 @@
 <script setup lang="ts">
+import { useRouter } from "vue-router";
 import BaseButton from "@/components/ui/BaseButton.vue";
 import { RouteName } from "@/consts/router.const.ts";
-import useAuth from "@/helpers/useAuth.helper";
+import useAuth from "@/composibles/useAuth.composible";
+import { RouterLink } from "vue-router";
 
 const { isAuth, removeAuth } = useAuth();
+const router = useRouter();
+
+function sendRoute() {
+  if(isAuth) removeAuth()
+  router.push({name: RouteName.LOGIN_PAGE})
+}
 </script>
 
 <template>
@@ -12,12 +20,7 @@ const { isAuth, removeAuth } = useAuth();
       <RouterLink class="base-header__link" :to="{name: RouteName.PUBLIC_PAGE}">Public</RouterLink>
       <RouterLink class="base-header__link" :to="{name: RouteName.PROTECTED_PAGE}">Protected</RouterLink>
     </div>
-      <RouterLink v-if="!isAuth" :to="{name: RouteName.LOGIN_PAGE}" class="base-header__action">
-        <BaseButton type="secondary">Login</BaseButton>
-      </RouterLink>
-      <RouterLink v-else :to="{name: RouteName.LOGIN_PAGE}" class="base-header__action">
-        <BaseButton type="secondary" @click="removeAuth">Logout</BaseButton>
-      </RouterLink>
+      <BaseButton type="secondary" @click="sendRoute">{{ !isAuth ? "Login" : "Logout" }}</BaseButton>
   </header>
 </template>
 
