@@ -1,7 +1,10 @@
 <script setup lang="ts">
+type inputType = "text" | "email" | "password";
+
 interface IProps {
-    inputType: "text" | "email" | "password",
-    inputName: "text" | "email" | "password"
+    inputType: inputType,
+    inputName: inputType,
+    isValid: true | false
 }
 
 defineProps<IProps>();
@@ -10,7 +13,7 @@ const model = defineModel();
 </script>
 
 <template>
-    <input v-model="model" :name="inputName" class="base-input" :class="inputName" :type="inputType" />
+    <input v-model="model" :name="inputName" :class="{inputName, 'is-invalid': !isValid}" :type="inputType" class="base-input"  />
 </template>
 
 <style scoped lang="scss">

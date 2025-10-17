@@ -4,37 +4,38 @@ import CookieHelper from "../helpers/cookie.helper";
 const isAuthValue = ref(false);
 
 export default function useAuth() {
-
     const isAuth = computed(() => isAuthValue.value);
 
     const checkAuth = () => {
-        const authCookie = CookieHelper.getCookie('isAuth');
+        const authCookie = Boolean(CookieHelper.getCookie());
 
         if(authCookie) {
             isAuthValue.value = true;
+        } else {
+            isAuthValue.value = false;
         }
     }
 
-    const setAuth = () => {
-        CookieHelper.setCookie('isAuth', 1, 1);
-        isAuthValue.value = true;
+    const setAuth = (action: string) => {
+        if(action === "login") {
+            CookieHelper.setCookie();
+            isAuthValue.value = true;
+            return;
+        }
+        if(action === "logout") {
+            CookieHelper.deleteCookie();
+            isAuthValue.value = false;
+            return;
+        }
     }
 
-    const removeAuth = () => {
-        CookieHelper.deleteCookie('isAuth');
-        isAuthValue.value = false;
-    }
-
-    onMounted(() => {
-        checkAuth()
-    });
+    onMounted(checkAuth);
 
 
     return {
         isAuthValue,
         isAuth,
         checkAuth,
-        setAuth,
-        removeAuth
+        setAuth
     };
 }

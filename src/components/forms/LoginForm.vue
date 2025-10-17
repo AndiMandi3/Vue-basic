@@ -10,8 +10,8 @@ import * as zod from "zod";
 import BaseButton from "@/components/ui/BaseButton.vue";
 import BaseInput from "@/components/ui/BaseInput.vue";
 
-import OpenedEyePassword from "@/assets/images/eye-show-icon.svg?component";
-import ClosedEyePassword from "@/assets/images/eye-hidden-icon.svg?component";
+import OpenedEyePasswordIcon from "@/assets/images/eye-show-icon.svg?component";
+import ClosedEyePasswordIcon from "@/assets/images/eye-hidden-icon.svg?component";
 
 const validationSchema = toTypedSchema(
     zod.object({
@@ -34,12 +34,16 @@ const { value: email, meta: emailMeta } = useField("email");
 const { value: password, meta: passwordMeta } = useField("password");
 
 const onSubmit = handleSubmit(() => {
-  setAuth();
+  setAuth("login");
   router.push({ name: route.query?.redirect as string || RouteName.PUBLIC_PAGE });
 });
 
-function onChangePassVisibility() {
-  isPasswordHidden.value = !isPasswordHidden.value;
+function showPassVisibility() {
+  if(isPasswordHidden && !isPasswordHidden.value) isPasswordHidden.value = !isPasswordHidden.value;
+}
+
+function hidePassVisibility() {
+  if(isPasswordHidden) isPasswordHidden.value = !isPasswordHidden.value;
 }
 </script>
 
@@ -48,45 +52,31 @@ function onChangePassVisibility() {
 
     <div class="login-form__input">
       <div>E-Mail:</div>
-      <!-- <input
-        v-model="email"
-        name="email"
-        class="login-form__input-email"
-        type="email"
-        :class="{'is-invalid': !emailMeta.valid}"
-      /> -->
       <BaseInput
         v-model="email" 
         input-type="email"
         input-name="email"
-        :class="{'is-invalid': !emailMeta.valid}"
+        :is-valid="emailMeta.valid"
       />
       <span class="login-form__error">{{ errors.email }}</span>
     </div>
 
     <div class="login-form__input">
       <div>Password:</div>
-      <!-- <input
-        v-model="password"
-        :type="fieldPassType"
-        name="password"
-        class="login-form__input-password"
-        :class="{'is-invalid': !passwordMeta.valid}"
-      /> -->
       <BaseInput 
         v-model="password"
         :input-type="fieldPassType"
         input-name="password"
-        :class="{'is-invalid': !passwordMeta.valid}"
+        :is-valid="passwordMeta.valid"
       />
-      <OpenedEyePassword v-if="isPasswordHidden" class="login-form__password-eye" @click="onChangePassVisibility" />
-      <ClosedEyePassword v-else class="login-form__password-eye" @click="onChangePassVisibility" />
+      <OpenedEyePasswordIcon v-if="isPasswordHidden" class="login-form__password-eye" @click="showPassVisibility" />
+      <ClosedEyePasswordIcon v-else class="login-form__password-eye" @click="hidePassVisibility" />
       
       <span class="login-form__error">{{ errors.password }}</span>
     </div>
 
     <BaseButton
-      :disabled="!meta.valid"
+      :isDisabled="!meta.valid"
       type="primary"
     >
       Login
