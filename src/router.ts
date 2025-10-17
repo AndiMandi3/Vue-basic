@@ -48,7 +48,7 @@ export const router = createRouter({
 
 router.beforeEach((to, _, next) => {
   document.title = to.meta.title as string;
-  const isAuthenticated = Boolean(CookieHelper.getCookie('isAuth'));
+  const isAuthenticated = CookieHelper.getCookie("isAuth");
 
   if(to.meta.requiresAuth && !isAuthenticated) {
     const redirectPageName = (to?.name || RouteName.MAIN_LAYOUT) as string;

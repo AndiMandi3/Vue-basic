@@ -1,14 +1,14 @@
 <script setup lang="ts">
 interface IProps {
   type: "primary" | "secondary" | "success" | "danger" | "warning" | "muted",
-  isDisable?: true | false
+  isDisabled?: boolean,
 }
 
 defineProps<IProps>();
 </script>
 
 <template>
-  <button class="base-button" :class="type" :disabled="isDisable">
+  <button class="base-button" :class="type" :disabled="isDisabled">
     <slot />
   </button>
 </template>

@@ -4,7 +4,7 @@ type inputType = "text" | "email" | "password";
 interface IProps {
     inputType: inputType,
     inputName: inputType,
-    isValid: true | false
+    isValid: boolean,
 }
 
 defineProps<IProps>();

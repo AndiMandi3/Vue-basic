@@ -1,16 +1,15 @@
 import Cookies from "js-cookie";
 
 export default class CookieHelper {
-
-    static setCookie(key: string = "isAuth", value: boolean | string | number = true, expireTime: number = 1) {
+    public static setCookie(key: string, value: boolean | string | number, expireTime: number) {
         Cookies.set(key, value.toString(), {expires: expireTime})
     }
 
-    static getCookie(key: string = "isAuth") {
+    public static getCookie(key: string) {
        return Cookies.get(key)
     }
 
-    static deleteCookie(key: string = "isAuth") {
+    public static deleteCookie(key: string) {
         Cookies.remove(key)
     }
 

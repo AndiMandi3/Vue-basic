@@ -7,8 +7,8 @@ import useAuth from "@/composibles/useAuth.composible";
 const { isAuth, setAuth } = useAuth();
 const router = useRouter();
 
-function authHandler() {
-  if(isAuth) setAuth("logout");
+function handlerAuthorize() {
+  if(isAuth) setAuth(false);
   router.push({name: RouteName.LOGIN_PAGE});
 }
 </script>
@@ -19,7 +19,7 @@ function authHandler() {
       <RouterLink class="base-header__link" :to="{name: RouteName.PUBLIC_PAGE}">Public</RouterLink>
       <RouterLink class="base-header__link" :to="{name: RouteName.PROTECTED_PAGE}">Protected</RouterLink>
     </div>
-      <BaseButton type="secondary" @click="authHandler">{{ !isAuth ? "Login" : "Logout" }}</BaseButton>
+      <BaseButton type="secondary" @click="handlerAuthorize">{{ !isAuth ? "Login" : "Logout" }}</BaseButton>
   </header>
 </template>
 

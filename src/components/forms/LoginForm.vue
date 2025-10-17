@@ -4,12 +4,10 @@ import { useRouter, useRoute } from "vue-router"
 import { useField, useForm } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
 import { RouteName } from "@/consts/router.const.ts";
-import useAuth from "@/composibles/useAuth.composible"
+import useAuth from "@/composibles/useAuth.composible.ts"
 import * as zod from "zod";
-
 import BaseButton from "@/components/ui/BaseButton.vue";
 import BaseInput from "@/components/ui/BaseInput.vue";
-
 import OpenedEyePasswordIcon from "@/assets/images/eye-show-icon.svg?component";
 import ClosedEyePasswordIcon from "@/assets/images/eye-hidden-icon.svg?component";
 
@@ -34,12 +32,12 @@ const { value: email, meta: emailMeta } = useField("email");
 const { value: password, meta: passwordMeta } = useField("password");
 
 const onSubmit = handleSubmit(() => {
-  setAuth("login");
+  setAuth(true)
   router.push({ name: route.query?.redirect as string || RouteName.PUBLIC_PAGE });
 });
 
 function showPassVisibility() {
-  if(isPasswordHidden && !isPasswordHidden.value) isPasswordHidden.value = !isPasswordHidden.value;
+  if(!isPasswordHidden.value) isPasswordHidden.value = !isPasswordHidden.value;
 }
 
 function hidePassVisibility() {
@@ -49,25 +47,26 @@ function hidePassVisibility() {
 
 <template>
   <form class="login-form" @submit="onSubmit">
-
     <div class="login-form__input">
       <div>E-Mail:</div>
       <BaseInput
-        v-model="email" 
+        v-model="email"
+        :is-valid="emailMeta.valid"
         input-type="email"
         input-name="email"
-        :is-valid="emailMeta.valid"
+        class="login-form__input-email"
       />
       <span class="login-form__error">{{ errors.email }}</span>
     </div>
 
     <div class="login-form__input">
       <div>Password:</div>
-      <BaseInput 
-        v-model="password"
-        :input-type="fieldPassType"
-        input-name="password"
-        :is-valid="passwordMeta.valid"
+      <BaseInput
+          v-model="password"
+          :input-type="fieldPassType"
+          :is-valid="passwordMeta.valid"
+          input-name="password"
+          class="login-form__input-password"
       />
       <OpenedEyePasswordIcon v-if="isPasswordHidden" class="login-form__password-eye" @click="showPassVisibility" />
       <ClosedEyePasswordIcon v-else class="login-form__password-eye" @click="hidePassVisibility" />
@@ -76,7 +75,7 @@ function hidePassVisibility() {
     </div>
 
     <BaseButton
-      :isDisabled="!meta.valid"
+      :is-disabled="!meta.valid"
       type="primary"
     >
       Login
