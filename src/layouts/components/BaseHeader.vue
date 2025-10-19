@@ -2,12 +2,12 @@
 import { useRouter, RouterLink } from "vue-router";
 import BaseButton from "@/components/ui/BaseButton.vue";
 import { RouteName } from "@/consts/router.const.ts";
-import useAuth from "@/composibles/useAuth.composible";
+import useAuth from "@/composibles/useAuth.ts";
 
 const { isAuth, setAuth } = useAuth();
 const router = useRouter();
 
-function handlerAuthorize() {
+function handleAuthorize() {
   if(isAuth) setAuth(false);
   router.push({name: RouteName.LOGIN_PAGE});
 }
@@ -19,7 +19,7 @@ function handlerAuthorize() {
       <RouterLink class="base-header__link" :to="{name: RouteName.PUBLIC_PAGE}">Public</RouterLink>
       <RouterLink class="base-header__link" :to="{name: RouteName.PROTECTED_PAGE}">Protected</RouterLink>
     </div>
-      <BaseButton type="secondary" @click="handlerAuthorize">{{ !isAuth ? "Login" : "Logout" }}</BaseButton>
+      <BaseButton type="secondary" @click="handleAuthorize">{{ !isAuth ? "Login" : "Logout" }}</BaseButton>
   </header>
 </template>
 

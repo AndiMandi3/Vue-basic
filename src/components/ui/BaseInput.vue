@@ -2,9 +2,10 @@
 type inputType = "text" | "email" | "password";
 
 interface IProps {
-    inputType: inputType,
-    inputName: inputType,
-    isValid: boolean,
+  inputType: inputType,
+  inputName: inputType,
+  isValid: boolean,
+  error?: string,
 }
 
 defineProps<IProps>();
@@ -13,7 +14,14 @@ const model = defineModel();
 </script>
 
 <template>
-    <input v-model="model" :name="inputName" :class="{inputName, 'is-invalid': !isValid}" :type="inputType" class="base-input"  />
+  <input
+      v-model="model"
+      :name="inputName"
+      :class="[`base-input__${inputName}`, {'base-input--is-invalid': !isValid}]"
+      :type="inputType"
+      class="base-input"
+  />
+  <span v-if="error" class="base-input__error">{{ error }}</span>
 </template>
 
 <style scoped lang="scss">
@@ -28,11 +36,15 @@ const model = defineModel();
     border-color: $accent-color;
   }
 
-  &.is-invalid {
+  &--is-invalid {
     border-color: $danger-color;
   }
 
-  &.password {
+  &__error {
+    color: $danger-color;
+  }
+
+  &__password {
     padding-right: 32px;
   }
 }

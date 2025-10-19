@@ -12,5 +12,4 @@ export default class CookieHelper {
     public static deleteCookie(key: string) {
         Cookies.remove(key)
     }
-
 }

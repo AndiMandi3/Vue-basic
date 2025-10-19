@@ -7,18 +7,15 @@ export default function useAuth() {
     const isAuth = computed(() => isAuthValue.value);
 
     const checkAuth = () => {
-        const authCookie = CookieHelper.getCookie("isAuth");
-        isAuthValue.value = !!authCookie;
+        isAuthValue.value = !!CookieHelper.getCookie("isAuth");
     }
 
     const setAuth = (isAuth: boolean) => {
+        isAuthValue.value = isAuth;
         if(isAuth) {
             CookieHelper.setCookie("isAuth", true, 1);
-            isAuthValue.value = true;
         } else {
             CookieHelper.deleteCookie("isAuth");
-            isAuthValue.value = false;
-            return;
         }
     }
 
