@@ -14,7 +14,13 @@ interface IProps {
 
 const props = defineProps<IProps>();
 
-const inputClasses = computed(() => [`base-input__input--${props.inputName}`, {'base-input__input--is-invalid': !!props.error}]);
+const inputClasses = computed(() => [
+  `base-input__input--${props.inputName}`, 
+  {'base-input__input--is-invalid': !!props.error}
+]);
+
+const eyeOpenClass = computed(() => ({'base-input__password-eye--open': isPasswordHidden.value}));
+const eyeCloseClass = computed(() => ({'base-input__password-eye--closed': !isPasswordHidden.value}));
 
 const model = defineModel();
 
@@ -36,13 +42,13 @@ function hidePassVisibility() {
     <input
       v-model="model"
       :name="inputName"
-      :class="inputClasses"
+      :class="[inputClasses, 'base-input__input']"
       :type="fieldPassType"
     />
-
-    <OpenedEyePasswordIcon v-if="isPasswordHidden && props.inputName === 'password'" class="base-input__password-eye--opened" @click="showPassVisibility" />
-    <ClosedEyePasswordIcon v-else-if="props.inputName === 'password'" class="base-input__password-eye--closed" @click="hidePassVisibility" />
-
+    <template v-if="props.inputName === 'password'">
+      <OpenedEyePasswordIcon v-if="isPasswordHidden" class="base-input__password-eye" :class="eyeOpenClass" @click="showPassVisibility" />
+      <ClosedEyePasswordIcon v-else class="base-input__password-eye" :class="eyeCloseClass" @click="hidePassVisibility" />
+    </template>
     <span v-if="error" class="base-input__input--error">{{ error }}</span>
   </div>
   
@@ -55,26 +61,24 @@ function hidePassVisibility() {
   position: relative;
 
   &__input {
-    &--email, &--password {
-      padding: 10px 0 0 0;
-      border: none;
-      border-bottom: 2px solid $gray-color;
-      font-size: 16px;
+    padding: 10px 0 0 0;
+    border: none;
+    border-bottom: 2px solid $gray-color;
+    font-size: 16px;
 
-      &:focus {
-        outline: none;
-        border-color: $accent-color;
-      }
+    &:focus {
+      outline: none;
+      border-color: $accent-color;
+    }
+
+    &--password {
+      display: flex;
+      flex-direction: column;
+      padding-right: 32px;
     }
 
     &--is-invalid {
       border-color: $danger-color;
-    }
-
-    &-password {
-      display: flex;
-      flex-direction: column;
-      padding-right: 32px;
     }
 
     &--error {
@@ -83,15 +87,13 @@ function hidePassVisibility() {
   }
 
   &__password-eye {
-    &--closed, &--opened {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      cursor: pointer;
-      padding: 4px;
-      width: 30px;
-      height: 30px;
-    }
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    padding: 4px;
+    width: 30px;
+    height: 30px;
   }
 }
 </style>
