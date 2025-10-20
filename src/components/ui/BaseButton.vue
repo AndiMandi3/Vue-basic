@@ -48,16 +48,16 @@ defineProps<IProps>();
     background-color: $disable-color;
   }
 
-  &--is-disabled {
+  &:disabled {
     background-color: $disable-color!important;
     cursor: not-allowed;
   }
 
-  &:not(.base-button--is-disabled):hover {
+  &:not(:disabled):hover {
     opacity: 0.5;
   }
 
-  &:not(.base-button--is-disabled):active {
+  &:not(:disabled):active {
     opacity: 0.75;
   }
 }

@@ -13,7 +13,8 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
-const classInput = computed(() => "base-input__input-" + props.inputName);
+
+const inputClasses = computed(() => [`base-input__input--${props.inputName}`, {'base-input__input--is-invalid': !!props.error}]);
 
 const model = defineModel();
 
@@ -35,7 +36,7 @@ function hidePassVisibility() {
     <input
       v-model="model"
       :name="inputName"
-      :class="[classInput, {'base-input__input--is-invalid': error}]"
+      :class="inputClasses"
       :type="fieldPassType"
     />
 
@@ -54,7 +55,7 @@ function hidePassVisibility() {
   position: relative;
 
   &__input {
-    &-email, &-password {
+    &--email, &--password {
       padding: 10px 0 0 0;
       border: none;
       border-bottom: 2px solid $gray-color;
