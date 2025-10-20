@@ -42,7 +42,8 @@ function hidePassVisibility() {
     <input
       v-model="model"
       :name="inputName"
-      :class="[inputClasses, 'base-input__input']"
+      сlass="base-input__input"
+      :class="inputClasses"
       :type="fieldPassType"
     />
     <template v-if="props.inputName === 'password'">
