@@ -42,7 +42,7 @@ function hidePassVisibility() {
     <input
       v-model="model"
       :name="inputName"
-      сlass="base-input__input"
+      class="base-input__input"
       :class="inputClasses"
       :type="fieldPassType"
     />
