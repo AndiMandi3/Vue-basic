@@ -8,7 +8,7 @@ defineProps<IProps>();
 </script>
 
 <template>
-  <button class="base-button" :class="[type, {'base-button--is-disabled': isDisabled}]" :disabled="isDisabled">
+  <button class="base-button" :class="[{'base-button--is-disabled': isDisabled}, type]" :disabled="isDisabled">
     <slot />
   </button>
 </template>
@@ -22,6 +22,7 @@ defineProps<IProps>();
   color: $white-color;
   font-size: 16px;
   transition: 0.3s;
+  cursor: pointer;
 
   &.primary {
     background-color: $accent-color;
@@ -47,22 +48,16 @@ defineProps<IProps>();
     background-color: $disable-color;
   }
 
-  &:disabled {
-    background-color: $disable-color;
-    color: $gray-color;
-    &:hover {
-      opacity: 1;
-    }
-    &:active {
-      opacity: 1;
-    }
+  &--is-disabled {
+    background-color: $disable-color!important;
+    cursor: not-allowed;
   }
 
-  &:hover{
+  &:not(.base-button--is-disabled):hover {
     opacity: 0.5;
   }
 
-  &:active {
+  &:not(.base-button--is-disabled):active {
     opacity: 0.75;
   }
 }
