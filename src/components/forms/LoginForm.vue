@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import { useRouter, useRoute } from "vue-router"
 import { useField, useForm } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
@@ -15,8 +14,6 @@ const validationSchema = toTypedSchema(
       password: zod.string().min(1, { message: "Это обязательное поле" }).min(8, { message: "Пароль должен быть минимум 8 символов" }),
     })
 );
-
-const isPasswordHidden = ref(true);
 
 const router = useRouter();
 const route = useRoute();
@@ -42,18 +39,15 @@ function onSubmit() {
           input-type="email"
           :error="errors.email"
           input-name="email"
-          display-name="E-Mail"
+          label="E-Mail"
       />
       <BaseInput
           v-model="password"
           input-type="password"
           :error="errors.password"
           input-name="password"
-          display-name="Password"
-          v-model:is-password-hidden="isPasswordHidden"
+          label="Password"
       />
-      
-
     <BaseButton
         :is-disabled="!meta.valid"
         type="primary"

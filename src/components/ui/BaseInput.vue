@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { ref, computed } from "vue";
 import OpenedEyePasswordIcon from "@/assets/images/eye-show-icon.svg?component";
 import ClosedEyePasswordIcon from "@/assets/images/eye-hidden-icon.svg?component";
 
@@ -8,8 +8,7 @@ type inputType = "text" | "email" | "password";
 interface IProps {
   inputType: inputType,
   inputName: inputType,
-  displayName: string,
-  isPasswordHidden?: boolean,
+  label?: string,
   error?: string,
 }
 
@@ -18,21 +17,21 @@ const classInput = computed(() => "base-input__input-" + props.inputName);
 
 const model = defineModel();
 
-const isPasswordHiddenModel = defineModel<boolean>("isPasswordHidden");
-const fieldPassType = computed(() => props.inputName === "password" && isPasswordHiddenModel.value ? "password" : "text");
+const isPasswordHidden = ref(true);
+const fieldPassType = computed(() => props.inputName === "password" && isPasswordHidden.value ? "password" : "text");
 
 function showPassVisibility() {
-  isPasswordHiddenModel.value = false;
+  isPasswordHidden.value = false;
 }
 
 function hidePassVisibility() {
-  isPasswordHiddenModel.value = true;
+  isPasswordHidden.value = true;
 }
 </script>
 
 <template>
   <div class="base-input">
-    <div>{{ props.displayName }}</div>
+    <div v-if="props.label">{{ props.label }}</div>
     <input
       v-model="model"
       :name="inputName"
@@ -40,7 +39,7 @@ function hidePassVisibility() {
       :type="fieldPassType"
     />
 
-    <OpenedEyePasswordIcon v-if="isPasswordHiddenModel && props.inputName === 'password'" class="base-input__password-eye--opened" @click="showPassVisibility" />
+    <OpenedEyePasswordIcon v-if="isPasswordHidden && props.inputName === 'password'" class="base-input__password-eye--opened" @click="showPassVisibility" />
     <ClosedEyePasswordIcon v-else-if="props.inputName === 'password'" class="base-input__password-eye--closed" @click="hidePassVisibility" />
 
     <span v-if="error" class="base-input__input--error">{{ error }}</span>
