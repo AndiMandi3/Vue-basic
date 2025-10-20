@@ -8,7 +8,7 @@ defineProps<IProps>();
 </script>
 
 <template>
-  <button class="base-button" :class="[{'base-button--is-disabled': isDisabled}, type]" :disabled="isDisabled">
+  <button class="base-button" :class="type" :disabled="isDisabled">
     <slot />
   </button>
 </template>
