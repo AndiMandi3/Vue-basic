@@ -11,13 +11,14 @@ function handleAuthorize() {
   if(isAuth) setAuth(false);
   router.push({name: RouteName.LOGIN_PAGE});
 }
+
 </script>
 
 <template>
   <header class="base-header">
     <div class="base-header__pages">
-      <RouterLink class="base-header__link" :to="{name: RouteName.PUBLIC_PAGE}">Public</RouterLink>
-      <RouterLink class="base-header__link" :to="{name: RouteName.PROTECTED_PAGE}">Protected</RouterLink>
+      <RouterLink class="base-header__link" exact-active-class="base-header__link--current" :to="{name: RouteName.PUBLIC_PAGE}">Public</RouterLink>
+      <RouterLink class="base-header__link" exact-active-class="base-header__link--current" :to="{name: RouteName.PROTECTED_PAGE}">Protected</RouterLink>
     </div>
       <BaseButton type="secondary" @click="handleAuthorize">{{ !isAuth ? "Login" : "Logout" }}</BaseButton>
   </header>
@@ -39,6 +40,10 @@ function handleAuthorize() {
     font-size: 20px;
     padding: 0 10px;
     color: $white-color;
+
+    &--current {
+      color: $green-color;
+    }
   }
 
   &__action {

@@ -25,7 +25,9 @@ const eyeCloseClass = computed(() => ({'base-input__password-eye--closed': !isPa
 const model = defineModel();
 
 const isPasswordHidden = ref(true);
-const fieldPassType = computed(() => props.inputName === "password" && isPasswordHidden.value ? "password" : "text");
+
+const isPasswordField = computed(() => props.inputName === "password" ? true : false);
+const fieldPassType = computed(() => isPasswordField.value && isPasswordHidden.value ? "password" : "text");
 
 function showPassVisibility() {
   isPasswordHidden.value = false;
@@ -46,7 +48,7 @@ function hidePassVisibility() {
       :class="inputClasses"
       :type="fieldPassType"
     />
-    <template v-if="props.inputName === 'password'">
+    <template v-if="isPasswordField">
       <OpenedEyePasswordIcon v-if="isPasswordHidden" class="base-input__password-eye" :class="eyeOpenClass" @click="showPassVisibility" />
       <ClosedEyePasswordIcon v-else class="base-input__password-eye" :class="eyeCloseClass" @click="hidePassVisibility" />
     </template>
