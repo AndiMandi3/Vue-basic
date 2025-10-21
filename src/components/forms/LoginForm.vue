@@ -1,83 +1,72 @@
 <script setup lang="ts">
-import { Form, Field, ErrorMessage } from "vee-validate";
+import { useRouter, useRoute } from "vue-router"
+import { useField, useForm } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
+import { RouteName } from "@/consts/router.const.ts";
+import useAuth from "@/composibles/useAuth.ts"
 import * as zod from "zod";
-
 import BaseButton from "@/components/ui/BaseButton.vue";
+import BaseInput from "@/components/ui/BaseInput.vue";
 
 const validationSchema = toTypedSchema(
     zod.object({
-      email: zod.string().min(1, { message: "This is required" }).email({ message: "Must be a valid email" }),
-      password: zod.string().min(1, { message: "This is required" }).min(8, { message: "Too short" }),
+      email: zod.string().min(1, { message: "Это обязательное поле" }).email({ message: "Некорректный E-mail" }),
+      password: zod.string().min(1, { message: "Это обязательное поле" }).min(8, { message: "Пароль должен быть минимум 8 символов" }),
     })
 );
 
-function onSubmit(values: unknown) {
-  alert(JSON.stringify(values, null, 2));
+const router = useRouter();
+const route = useRoute();
+
+const { setAuth } = useAuth();
+
+const { errors, meta } = useForm({ validationSchema });
+
+const { value: email} = useField("email");
+const { value: password} = useField("password");
+
+function onSubmit() {
+  setAuth(true)
+  router.push({ name: route.query?.redirect as string || RouteName.PUBLIC_PAGE });
 }
 </script>
 
 <template>
-  <Form class="login-form" :validation-schema="validationSchema" @submit="onSubmit">
+  <form class="login-form" @submit.prevent="onSubmit">
+      <BaseInput
+          v-model="email"
+          input-type="email"
+          :error="errors.email"
+          input-name="email"
+          label="E-Mail"
+      />
+      <BaseInput
+          v-model="password"
+          input-type="password"
+          :error="errors.password"
+          input-name="password"
+          label="Password"
+      />
+    <BaseButton
+        :is-disabled="!meta.valid"
+        type="primary"
+    >
+      Login
+    </BaseButton>
+  </form>
 
-    <div class="login-form__input">
-      <div>E-Mail:</div>
-      <Field name="email" class="login-form__input-email" type="email"/>
-      <ErrorMessage class="login-form__error" name="email" />
-    </div>
-    <div class="login-form__input">
-      <div>Password:</div>
-      <Field name="password" type="password" class="login-form__input-password" />
-      <ErrorMessage class="login-form__error" name="password" />
-    </div>
-
-    <BaseButton type="primary">Login</BaseButton>
-  </Form>
 </template>
 
 <style scoped lang="scss">
 .login-form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
 
   &__input {
     display: flex;
     flex-direction: column;
-
-    &-email, &-password {
-      padding: 10px 0 0 0;
-      border: none;
-      border-bottom: 2px solid $gray-color;
-      font-size: 16px;
-
-      &:focus {
-        outline: none;
-        border-color: $accent-color;
-      }
-    }
-  }
-
-  &__error {
-    color: $danger-color;
-  }
-
-  &__submit {
-    font-size: 16px;
-    padding: 10px;
-    background-color: $accent-color;
-    color: $white-color;
-    border: none;
-    border-radius: 5px;
-    transition: 0.3s;
-
-    &:hover{
-      background-color: $green-color-hover;
-    }
-
-    &:active {
-      background-color: $green-color-focus;
-    }
+    position: relative;
   }
 }
 </style>

@@ -1,14 +1,14 @@
 <script setup lang="ts">
 interface IProps {
-  type: "primary" | "secondary" | "success" | "danger" | "warning" | "muted";
+  type: "primary" | "secondary" | "success" | "danger" | "warning" | "muted",
+  isDisabled?: boolean,
 }
 
 defineProps<IProps>();
-
 </script>
 
 <template>
-  <button class="base-button" :class="type">
+  <button class="base-button" :class="type" :disabled="isDisabled">
     <slot />
   </button>
 </template>
@@ -22,6 +22,7 @@ defineProps<IProps>();
   color: $white-color;
   font-size: 16px;
   transition: 0.3s;
+  cursor: pointer;
 
   &.primary {
     background-color: $accent-color;
@@ -47,12 +48,17 @@ defineProps<IProps>();
     background-color: $disable-color;
   }
 
-  &:hover{
-    opacity: 50%;
+  &:disabled {
+    background-color: $disable-color!important;
+    cursor: not-allowed;
   }
 
-  &:active {
-    opacity: 75%;
+  &:not(:disabled):hover {
+    opacity: 0.5;
+  }
+
+  &:not(:disabled):active {
+    opacity: 0.75;
   }
 }
 

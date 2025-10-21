@@ -1,17 +1,26 @@
 <script setup lang="ts">
+import { useRouter, RouterLink } from "vue-router";
 import BaseButton from "@/components/ui/BaseButton.vue";
 import { RouteName } from "@/consts/router.const.ts";
+import useAuth from "@/composibles/useAuth.ts";
+
+const { isAuth, setAuth } = useAuth();
+const router = useRouter();
+
+function handleAuthorize() {
+  if(isAuth) setAuth(false);
+  router.push({name: RouteName.LOGIN_PAGE});
+}
+
 </script>
 
 <template>
   <header class="base-header">
     <div class="base-header__pages">
-      <RouterLink class="base-header__link" :to="{name: RouteName.PUBLIC_PAGE}">Public</RouterLink>
-      <RouterLink class="base-header__link" :to="{name: RouteName.PROTECTED_PAGE}">Protected</RouterLink>
+      <RouterLink class="base-header__link" exact-active-class="base-header__link--current" :to="{name: RouteName.PUBLIC_PAGE}">Public</RouterLink>
+      <RouterLink class="base-header__link" exact-active-class="base-header__link--current" :to="{name: RouteName.PROTECTED_PAGE}">Protected</RouterLink>
     </div>
-      <RouterLink :to="{name: RouteName.LOGIN_PAGE}" class="base-header__action">
-        <BaseButton type="secondary">Login</BaseButton>
-      </RouterLink>
+      <BaseButton type="secondary" @click="handleAuthorize">{{ !isAuth ? "Login" : "Logout" }}</BaseButton>
   </header>
 </template>
 
@@ -31,6 +40,10 @@ import { RouteName } from "@/consts/router.const.ts";
     font-size: 20px;
     padding: 0 10px;
     color: $white-color;
+
+    &--current {
+      color: $green-color;
+    }
   }
 
   &__action {
