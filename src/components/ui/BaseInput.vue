@@ -26,7 +26,7 @@ const model = defineModel();
 
 const isPasswordHidden = ref(true);
 
-const isPasswordField = computed(() => props.inputName === "password" ? true : false);
+const isPasswordField = computed(() => props.inputName === "password");
 const fieldPassType = computed(() => isPasswordField.value && isPasswordHidden.value ? "password" : "text");
 
 function showPassVisibility() {

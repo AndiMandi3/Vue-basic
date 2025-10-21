@@ -29,7 +29,6 @@ function onSubmit() {
   setAuth(true)
   router.push({ name: route.query?.redirect as string || RouteName.PUBLIC_PAGE });
 }
-
 </script>
 
 <template>
