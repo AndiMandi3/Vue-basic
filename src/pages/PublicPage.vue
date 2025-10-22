@@ -9,20 +9,19 @@ import TelegramIcon from "@/assets/images/telegram-icon.svg?component";
 <template>
   <div class="public-page">
     <h2 class="public-page__title">Публичная страница пользователя</h2>
-
     <div class="public-page__card">
-      
-      <div class="public-page__brief-info">
-        <img src="@/assets/images/avatar-img.jpg" alt="Avatar image" class="public-page__brief-info-avatar">
-        <h3 class="public-page__brief-info-fullname">Димаков Андрей</h3>
+
+      <div class="public-page__info">
+        <img src="@/assets/images/avatar-img.jpg" alt="Avatar image" class="public-page__avatar">
+        <h3 class="public-page__fullname">Димаков Андрей</h3>
       </div>
 
-      <div class="public-page__card-divider"></div>
+      <div class="public-page__divider"></div>
 
       <div class="public-page__contact">
         <h2 class="public-page__contact-title">Личная информация пользователя</h2>
-        <div class="public-page__contact-elements">
 
+        <div class="public-page__contact-elements">
           <div class="public-page__contact-item">
             <CalendarIcon class="public-page__contact-item-icon" title="Дата рождения" />
             <p class="public-page__contact-item-text">04.04.2003</p>
@@ -71,23 +70,23 @@ import TelegramIcon from "@/assets/images/telegram-icon.svg?component";
     border: 1px solid $gray-color;
     padding: 20px 50px;
     border-radius: 30px;
-
-    &-divider {
-      padding: 10px 0;
-      border-bottom: 1px solid $gray-color;
-    }
   }
 
-  &__brief-info {
+  &__divider {
+    padding: 10px 0;
+    border-bottom: 1px solid $gray-color;
+  }
+
+  &__info {
     display: flex;
     flex-direction: column;
     gap: 20px;
     align-items: center;
+  }
 
-    &-avatar {
-      width: 10%;
-      border-radius: 50%;
-    }
+  &__avatar {
+    width: 10%;
+    border-radius: 50%;
   }
 
   &__contact {
