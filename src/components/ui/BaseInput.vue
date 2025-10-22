@@ -17,7 +17,7 @@ const inputClasses = computed(() => [
   {'base-input__input--is-invalid': !!props.error}
 ]);
 
-const model = defineModel<string>();
+const model = defineModel<unknown>();
 
 const isPasswordHidden = ref(true);
 

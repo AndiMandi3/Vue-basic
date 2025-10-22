@@ -54,7 +54,6 @@ function onSubmit() {
       Login
     </BaseButton>
   </form>
-
 </template>
 
 <style scoped lang="scss">

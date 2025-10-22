@@ -9,32 +9,41 @@ import TelegramIcon from "@/assets/images/telegram-icon.svg?component";
 <template>
   <div class="public-page">
     <h2 class="public-page__title">Публичная страница пользователя</h2>
+
     <div class="public-page__card">
+      
       <div class="public-page__brief-info">
         <img src="@/assets/images/avatar-img.jpg" alt="Avatar image" class="public-page__brief-info-avatar">
         <h3 class="public-page__brief-info-fullname">Димаков Андрей</h3>
       </div>
+
       <div class="public-page__card-divider"></div>
+
       <div class="public-page__contact">
         <h2 class="public-page__contact-title">Личная информация пользователя</h2>
         <div class="public-page__contact-elements">
+
           <div class="public-page__contact-item">
             <CalendarIcon class="public-page__contact-item-icon" title="Дата рождения" />
             <p class="public-page__contact-item-text">04.04.2003</p>
           </div>
+
           <div class="public-page__contact-item">
             <EmailIcon class="public-page__contact-icon" title="Электронная почта" />
             <a href="mailto:Andre200344@bk.ru" class="public-page__contact-item-text--is-link public-page__contact-item-text">Andre200344@bk.ru</a>
           </div>
+
           <div class="public-page__contact-item">
             <LocationIcon class="public-page__contact-item-icon" title="Местонахождение" />
             <p class="public-page__contact-item-text">г. Новосибирск</p>
           </div>
+
           <div class="public-page__contact-item">
             <PhoneIcon class="public-page__contact-item-icon" title="Контактный телефон" />
             <a href="tel:+79994648591" class="public-page__contact-item-text public-page__contact-item-text--is-link">+7 (999)-464-85-91</a>
             <span class="public-page__contact-item-note"> — предпочитаемый способ связи</span>
           </div>
+
           <div class="public-page__contact-item">
             <TelegramIcon class="public-page__contact-item-icon" title="Telegram-аккаунт" />
             <a href="https://t.me/andimandi03" class="public-page__contact-item-text--is-link public-page__contact-item-text">https://t.me/andimandi03</a>
@@ -103,7 +112,7 @@ import TelegramIcon from "@/assets/images/telegram-icon.svg?component";
       &-text--is-link {
         color: $accent-color;
       }
-      
+
       &-note {
         font-weight: 700;
       }
