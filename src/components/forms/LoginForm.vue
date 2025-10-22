@@ -22,8 +22,8 @@ const { setAuth } = useAuth();
 
 const { errors, meta } = useForm({ validationSchema });
 
-const { value: email} = useField("email");
-const { value: password} = useField("password");
+const { value: email} = useField<string>("email");
+const { value: password} = useField<string>("password");
 
 function onSubmit() {
   setAuth(true)
