@@ -30,6 +30,8 @@ function handleAuthorize() {
   background-color: $accent-color;
   display: flex;
   justify-content: space-between;
+  width: 100%;
+  position: fixed;
 
   &__pages {
     display: flex;
