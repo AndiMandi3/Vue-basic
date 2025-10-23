@@ -12,9 +12,7 @@ interface IProps {
   city?: string,
   phone?: string,
   telegramLink?: string,
-  isEmailPriority?: boolean,
-  isPhonePriority?: boolean,
-  isTelegramPriority?: boolean,
+  priorityContact?: "email" | "telegram" | "phone",
 }
 const props = defineProps<IProps>();
 
@@ -29,8 +27,8 @@ const datas = computed(() => [
     value: props.email,
     component: EmailIcon,
     title: "Адрес электронной почты",
-    isPriority: props.isEmailPriority,
     hasValue: !!props.email,
+    isPriority: props.priorityContact === "email",
   },
   {
     value: props.city ? "г. " + props.city : undefined,
@@ -42,15 +40,15 @@ const datas = computed(() => [
     value: props.phone,
     component: PhoneIcon,
     title: "Контактный номер телефона",
-    isPriority: props.isPhonePriority,
     hasValue: !!props.phone,
+    isPriority: props.priorityContact === "phone",
   },
   {
     value: props.telegramLink,
     component: TelegramIcon,
     title: "Ссылка на Telegram-аккаунт",
-    isPriority: props.isTelegramPriority,
     hasValue: !!props.telegramLink,
+    isPriority: props.priorityContact === "telegram",
   },
 ].filter(item => item.hasValue));
 
@@ -58,7 +56,7 @@ const hasAnyData = computed(() => {
   return !!(props.dateBirth || props.email || props.city || props.phone || props.telegramLink);
 });
 
-const isPriorityClass = computed(() => ({"contact-info__item-note": props.isTelegramPriority || props.isPhonePriority || props.isEmailPriority}))
+const isPriorityClass = computed(() => ({"contact-info__item-note": props.priorityContact}))
 </script>
 
 <template>

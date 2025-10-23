@@ -18,7 +18,7 @@ import ContactInfo from "@/pages/publicPage/components/ContactInfo.vue";
           city="Новосибирск"
           phone="+7 (999)-464-85-91"
           telegramLink="https://t.me/andimandi03"
-          :is-telegram-priority="true"
+          priority-contact="phone"
       />
     </div>
   </div>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import customAvatar from "@/assets/images/avatar-img.jpg";
-import AnonymousAvatar from "@/assets/images/anonymous-avatar.png";
+import AnonymousAvatar from "@/assets/images/anonymous-avatar-img.png";
 
 interface IProps {
   username: string,
