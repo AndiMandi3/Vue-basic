@@ -97,8 +97,8 @@ const isPriorityClass = computed(() => ({"contact-info__item-note": props.priori
 
   &__elements {
     padding-top: 30px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-wrap: wrap;
     gap: 20px;
 
     &-empty {
@@ -114,6 +114,7 @@ const isPriorityClass = computed(() => ({"contact-info__item-note": props.priori
 
   &__item {
     display: flex;
+    flex: 1 1 49%;
     gap: 10px;
 
     &-note {
