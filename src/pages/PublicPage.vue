@@ -8,6 +8,7 @@ import LocationIcon from "@/assets/images/location-icon.svg?component";
 import PhoneIcon from "@/assets/images/phone-icon.svg?component";
 import TelegramIcon from "@/assets/images/telegram-icon.svg?component";
 import ContactInfo from "./publicPage/components/ContactInfo.vue";
+import avatarFromServer from "@/assets/images/avatar-img.jpg";
 
 const data = computed(() => [
   {
@@ -32,13 +33,14 @@ const data = computed(() => [
     component: TelegramIcon,
   },
 ]);
+
 </script>
 
 <template>
   <div class="public-page">
     <h2 class="public-page__title">Публичная страница пользователя</h2>
     <div class="public-page__card">
-      <MainInfo username="Димаков Андрей" :have-avatar="true" />
+      <MainInfo username="Димаков Андрей" :avatar="avatarFromServer" />
 
       <LineDivider />
 

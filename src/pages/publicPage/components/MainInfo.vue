@@ -1,20 +1,18 @@
 <script setup lang="ts">
-import { computed } from "vue";
-import customAvatar from "@/assets/images/avatar-img.jpg";
 import AnonymousAvatar from "@/assets/images/anonymous-avatar-img.png";
 
 interface IProps {
   username: string,
-  haveAvatar: boolean,
+  avatar: string,
 }
+
 const props = defineProps<IProps>();
 
-const isUserAvatar = computed<string>(() => props.haveAvatar ? customAvatar : AnonymousAvatar);
 </script>
 
 <template>
   <div class="main-info">
-    <img :src="isUserAvatar" alt="Avatar image" class="main-info__avatar">
+    <img :src="props.avatar || AnonymousAvatar" alt="Avatar image" class="main-info__avatar">
     <h3 class="main-info__fullname">{{ username }}</h3>
   </div>
 </template>
