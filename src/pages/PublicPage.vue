@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed } from "vue";
 import MainInfo from "@/pages/publicPage/components/MainInfo.vue";
 import LineDivider from "./publicPage/components/LineDivider.vue";
 import CalendarIcon from "@/assets/images/calendar-icon.svg?component";
@@ -10,7 +9,7 @@ import TelegramIcon from "@/assets/images/telegram-icon.svg?component";
 import ContactInfo from "./publicPage/components/ContactInfo.vue";
 import avatarFromServer from "@/assets/images/avatar-img.jpg";
 
-const data = computed(() => [
+const data = [
   {
     value: "04.04.2003",
     component: CalendarIcon,
@@ -32,7 +31,7 @@ const data = computed(() => [
     value: "https://t.me/andimandi03",
     component: TelegramIcon,
   },
-]);
+];
 
 </script>
 
@@ -51,8 +50,10 @@ const data = computed(() => [
           <ContactInfo v-for="(item, index) in data" :key="index" class="contact-info__item">
             <template #prepand>
               <component :is="item.component" class="contact-info__item-icon" />
-              <p class="contact-info__item-text">{{ item.value }}</p>
             </template>
+
+            <p class="contact-info__item-text">{{ item.value }}</p>
+
             <template v-if="item.isPriority" #append>
               <span class="contact-info__item-note"> — предпочитаемый способ связи</span>
             </template>
