@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import MainInfo from "@/pages/publicPage/components/MainInfo.vue";
 import LineDivider from "./publicPage/components/LineDivider.vue";
+import ContactInfo from "./publicPage/components/ContactInfo.vue";
 import CalendarIcon from "@/assets/images/calendar-icon.svg?component";
 import EmailIcon from "@/assets/images/email-icon.svg?component";
 import LocationIcon from "@/assets/images/location-icon.svg?component";
 import PhoneIcon from "@/assets/images/phone-icon.svg?component";
 import TelegramIcon from "@/assets/images/telegram-icon.svg?component";
-import ContactInfo from "./publicPage/components/ContactInfo.vue";
-import avatarFromServer from "@/assets/images/avatar-img.jpg";
+import UserAvatar from "@/assets/images/avatar-img.jpg";
 
-const data = [
+const userData = [
   {
     value: "04.04.2003",
     component: CalendarIcon,
@@ -32,34 +32,17 @@ const data = [
     component: TelegramIcon,
   },
 ];
-
 </script>
 
 <template>
   <div class="public-page">
     <h2 class="public-page__title">Публичная страница пользователя</h2>
     <div class="public-page__card">
-      <MainInfo username="Димаков Андрей" :avatar="avatarFromServer" />
+      <MainInfo username="Димаков Андрей" :avatar="UserAvatar" />
 
       <LineDivider />
 
-      <div class="contact-info">
-        <h2 class="contact-info__title">Личная информация пользователя</h2>
-
-        <div class="contact-info__elements">
-          <ContactInfo v-for="(item, index) in data" :key="index" class="contact-info__item">
-            <template #prepand>
-              <component :is="item.component" class="contact-info__item-icon" />
-            </template>
-
-            <p class="contact-info__item-text">{{ item.value }}</p>
-
-            <template v-if="item.isPriority" #append>
-              <span class="contact-info__item-note"> — предпочитаемый способ связи</span>
-            </template>
-          </ContactInfo>
-        </div>
-      </div>
+      <ContactInfo :content="userData"/>
     </div>
   </div>
 </template>
@@ -81,41 +64,6 @@ const data = [
     border: 1px solid $gray-color;
     padding: 20px 50px;
     border-radius: 30px;
-  }
-}
-
-.contact-info {
-  padding: 20px 0;
-
-  &__title {
-    text-align: center;
-  }
-
-  &__elements {
-    padding-top: 30px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-
-    &-empty {
-      padding: 20px 0;
-      display: flex;
-      justify-content: center;
-
-      &-text {
-        font-weight: $bold-font;
-      }
-    }
-  }
-
-  &__item {
-    display: flex;
-    flex: 1 1 49%;
-    gap: 10px;
-
-    &-note {
-      font-weight: $bold-font;
-    }
   }
 }
 </style>
