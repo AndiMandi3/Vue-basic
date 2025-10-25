@@ -16,11 +16,7 @@ const props = defineProps<IProps>();
 <template>
   <div>
     <slot name="prepand" v-if="slots.prepand" />
-    {{props.value}}
+    {{ props.value }}
     <slot name="append" v-if="slots.append" />
   </div>
 </template>
-
-<style scoped lang="scss">
-
-</style>

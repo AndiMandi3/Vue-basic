@@ -2,47 +2,18 @@
 import MainInfo from "@/pages/publicPage/components/MainInfo.vue";
 import LineDivider from "./publicPage/components/LineDivider.vue";
 import ContactInfo from "./publicPage/components/ContactInfo.vue";
-import CalendarIcon from "@/assets/images/calendar-icon.svg?component";
-import EmailIcon from "@/assets/images/email-icon.svg?component";
-import LocationIcon from "@/assets/images/location-icon.svg?component";
-import PhoneIcon from "@/assets/images/phone-icon.svg?component";
-import TelegramIcon from "@/assets/images/telegram-icon.svg?component";
-import UserAvatar from "@/assets/images/avatar-img.jpg";
 
-const userData = [
-  {
-    value: "04.04.2003",
-    component: CalendarIcon,
-  },
-  {
-    value: "Andre200344@bk.ru",
-    component: EmailIcon,
-  },
-  {
-    value: "Г. Новосибирск",
-    component: LocationIcon,
-  },
-  {
-    value: "+7 (999)-464-85-91",
-    component: PhoneIcon,
-    isPriority: true,
-  },
-  {
-    value: "https://t.me/andimandi03",
-    component: TelegramIcon,
-  },
-];
 </script>
 
 <template>
   <div class="public-page">
     <h2 class="public-page__title">Публичная страница пользователя</h2>
     <div class="public-page__card">
-      <MainInfo username="Димаков Андрей" :avatar="UserAvatar" />
+      <MainInfo username="Димаков Андрей" />
 
       <LineDivider />
 
-      <ContactInfo :content="userData"/>
+      <ContactInfo />
     </div>
   </div>
 </template>

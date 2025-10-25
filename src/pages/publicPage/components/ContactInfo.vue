@@ -1,17 +1,34 @@
 <script setup lang="ts">
 import ContactInfoItem from "@/pages/publicPage/components/ContactInfoItem.vue";
+import CalendarIcon from "@/assets/images/calendar-icon.svg?component";
+import EmailIcon from "@/assets/images/email-icon.svg?component";
+import LocationIcon from "@/assets/images/location-icon.svg?component";
+import PhoneIcon from "@/assets/images/phone-icon.svg?component";
+import TelegramIcon from "@/assets/images/telegram-icon.svg?component";
 
-type enterContent = {
-  value: string;
-  component: unknown;
-  isPriority?: boolean;
-}
-
-interface IProps {
-  content: enterContent[],
-}
-
-const props = defineProps<IProps>();
+const userData = [
+  {
+    value: "04.04.2003",
+    component: CalendarIcon,
+  },
+  {
+    value: "Andre200344@bk.ru",
+    component: EmailIcon,
+  },
+  {
+    value: "Г. Новосибирск",
+    component: LocationIcon,
+  },
+  {
+    value: "+7 (999)-464-85-91",
+    component: PhoneIcon,
+    isPriority: true,
+  },
+  {
+    value: "https://t.me/andimandi03",
+    component: TelegramIcon,
+  },
+];
 </script>
 
 <template>
@@ -20,9 +37,8 @@ const props = defineProps<IProps>();
 
     <div class="contact-info__elements">
       <ContactInfoItem
-          v-for="(item, index) in props.content"
+          v-for="(item, index) in userData"
           :key="index"
-          :content="item.value"
           :value="item.value"
           class="contact-info__item"
       >

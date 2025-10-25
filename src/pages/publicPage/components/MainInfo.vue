@@ -1,18 +1,17 @@
 <script setup lang="ts">
 import AnonymousAvatar from "@/assets/images/anonymous-avatar-img.png";
+import UserAvatar from "@/assets/images/avatar-img.jpg";
 
 interface IProps {
   username: string,
-  avatar: string,
 }
 
-const props = defineProps<IProps>();
-
+defineProps<IProps>();
 </script>
 
 <template>
   <div class="main-info">
-    <img :src="props.avatar || AnonymousAvatar" alt="Avatar image" class="main-info__avatar">
+    <img :src="UserAvatar || AnonymousAvatar" alt="Avatar image" class="main-info__avatar">
     <h3 class="main-info__fullname">{{ username }}</h3>
   </div>
 </template>
