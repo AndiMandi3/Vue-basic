@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { useHumansStore } from "@/stores/useCounterStore.ts";
+
+const humansStore = useHumansStore();
 
 </script>
 
