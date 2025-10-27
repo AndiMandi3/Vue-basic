@@ -1,8 +1,8 @@
 <script setup lang="ts">
 interface ISlots {
   prepand(): any,
-  append(): any,
-  default(): any
+  append?(): any,
+  default(): any,
 }
 
 interface IProps {
@@ -10,13 +10,13 @@ interface IProps {
 }
 
 const slots = defineSlots<ISlots>();
-const props = defineProps<IProps>();
+defineProps<IProps>();
 </script>
 
 <template>
   <div>
-    <slot name="prepand" v-if="slots.prepand" />
-    {{ props.value }}
-    <slot name="append" v-if="slots.append" />
+    <slot name="prepand" />
+    {{ value }}
+    <slot name="append" />
   </div>
 </template>

@@ -2,7 +2,7 @@
 import { useRouter, RouterLink } from "vue-router";
 import BaseButton from "@/components/ui/BaseButton.vue";
 import { RouteName } from "@/consts/router.const.ts";
-import useAuth from "@/composable/useAuth.ts";
+import useAuth from "@/composables/useAuth";
 
 const { isAuth, setAuth } = useAuth();
 const router = useRouter();
