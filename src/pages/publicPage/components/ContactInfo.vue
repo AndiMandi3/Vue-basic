@@ -40,14 +40,13 @@ const userData = [
           v-for="(item, index) in userData"
           :key="index"
           :value="item.value"
-          class="contact-info__item"
       >
         <template #prepand>
           <component :is="item.component" />
         </template>
 
         <template v-if="item.isPriority" #append>
-          <span class="contact-info__item-note"> — предпочитаемый способ связи</span>
+          <span class="contact-info__note"> — предпочитаемый способ связи</span>
         </template>
       </ContactInfoItem>
     </div>
@@ -69,10 +68,8 @@ const userData = [
     gap: 20px;
   }
 
-  &__item {
-    &-note {
-      font-weight: $bold-font;
-    }
+  &__note {  
+    font-weight: $bold-font;
   }
 }
 </style>

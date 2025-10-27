@@ -14,18 +14,16 @@ defineProps<IProps>();
 
 <template>
   <div>
-    <slot name="prepand" class="contact-info__item" />
+    <slot name="prepand" class="contact-item" />
     {{ value }}
     <slot name="append" />
   </div>
 </template>
 
 <style scoped lang="scss">
-.contact-info {
-  &__item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 </style>
