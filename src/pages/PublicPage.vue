@@ -2,7 +2,6 @@
 import MainInfo from "@/pages/publicPage/components/MainInfo.vue";
 import LineDivider from "./publicPage/components/LineDivider.vue";
 import ContactInfo from "./publicPage/components/ContactInfo.vue";
-
 </script>
 
 <template>
