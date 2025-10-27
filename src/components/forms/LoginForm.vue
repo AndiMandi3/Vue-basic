@@ -3,7 +3,7 @@ import { useRouter, useRoute } from "vue-router"
 import { useField, useForm } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
 import { RouteName } from "@/consts/router.const.ts";
-import useAuth from "@/composibles/useAuth.ts"
+import useAuth from "@/composables/useAuth"
 import * as zod from "zod";
 import BaseButton from "@/components/ui/BaseButton.vue";
 import BaseInput from "@/components/ui/BaseInput.vue";
@@ -22,8 +22,8 @@ const { setAuth } = useAuth();
 
 const { errors, meta } = useForm({ validationSchema });
 
-const { value: email} = useField("email");
-const { value: password} = useField("password");
+const { value: email} = useField<string>("email");
+const { value: password} = useField<string>("password");
 
 function onSubmit() {
   setAuth(true)
@@ -54,7 +54,6 @@ function onSubmit() {
       Login
     </BaseButton>
   </form>
-
 </template>
 
 <style scoped lang="scss">

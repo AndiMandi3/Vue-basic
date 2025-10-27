@@ -2,7 +2,7 @@
 import { useRouter, RouterLink } from "vue-router";
 import BaseButton from "@/components/ui/BaseButton.vue";
 import { RouteName } from "@/consts/router.const.ts";
-import useAuth from "@/composibles/useAuth.ts";
+import useAuth from "@/composables/useAuth";
 
 const { isAuth, setAuth } = useAuth();
 const router = useRouter();
@@ -30,6 +30,8 @@ function handleAuthorize() {
   background-color: $accent-color;
   display: flex;
   justify-content: space-between;
+  width: 100%;
+  position: fixed;
 
   &__pages {
     display: flex;
