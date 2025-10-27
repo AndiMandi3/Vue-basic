@@ -43,7 +43,7 @@ const userData = [
           class="contact-info__item"
       >
         <template #prepand>
-          <component :is="item.component" class="contact-info__item-icon" />
+          <component :is="item.component" />
         </template>
 
         <template v-if="item.isPriority" #append>
@@ -64,16 +64,12 @@ const userData = [
 
   &__elements {
     padding-top: 30px;
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 20px;
   }
 
   &__item {
-    display: flex;
-    flex: 1 1 49%;
-    gap: 10px;
-
     &-note {
       font-weight: $bold-font;
     }

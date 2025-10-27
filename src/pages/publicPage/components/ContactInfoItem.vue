@@ -2,7 +2,6 @@
 interface ISlots {
   prepand(): any,
   append?(): any,
-  default(): any,
 }
 
 interface IProps {
@@ -15,8 +14,18 @@ defineProps<IProps>();
 
 <template>
   <div>
-    <slot name="prepand" />
+    <slot name="prepand" class="contact-info__item" />
     {{ value }}
     <slot name="append" />
   </div>
 </template>
+
+<style scoped lang="scss">
+.contact-info {
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+}
+</style>
