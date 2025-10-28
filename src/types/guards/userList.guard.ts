@@ -1,6 +1,6 @@
 import type { TUser, TUserList } from "@/types/userList.types";
 
-function isUserList(data: unknown): data is TUserList {
+function isUsers(data: unknown): data is TUserList {
   return (
     (data !== null) &&
     (typeof data === "object") &&
@@ -25,6 +25,6 @@ function isUser(data: unknown): data is TUser {
 }
 
 export {
-  isUserList,
+  isUsers,
   isUser,
 }

@@ -1,10 +1,8 @@
 import { getFormattedBirthday, getFormattedName } from "@/helpers/api.helpers";
-import { isUser, isUserList } from "@/types/guards/userList.guard";
+import { isUser, isUsers } from "@/types/guards/userList.guard";
 import type { TUserList, TUser, TUserPreview } from "@/types/userList.types";
 
-export default class User {
-  static readonly URL_API: string = import.meta.env.VITE_URL_API;
-
+export default class UserApi {
   public static async getUserData(userData: TUser): Promise<TUserPreview | null> {
     try {
       if (!userData) return null;
@@ -24,33 +22,33 @@ export default class User {
     }
   }
 
-  public static async getUsers(counterPage: number = 1): Promise<TUserPreview[] | null> {
+  public static async getUserList(counterPage: number = 1): Promise<TUserPreview[] | []> {
     try {
-      const usersReceived: TUser[] | null = await this.getUserList(counterPage, 10);
+      const usersReceived: TUser[] | null = await this.getUsers(counterPage, 10);
       const allUsers: TUserPreview[] = [];
 
-      if (usersReceived) {
-        for (const user of usersReceived) {
-          if (!user || !isUser(user)) continue;
+      if (!usersReceived) return [];
 
-          const receivedUser: TUserPreview | null = await this.getUserData(user);
+      for (const user of usersReceived) {
+        if (!user || !isUser(user)) continue;
 
-          if (receivedUser) allUsers.push(receivedUser);
-        }
-        return allUsers;
+        const receivedUser: TUserPreview | null = await this.getUserData(user);
 
-      } else return null;
+        if (receivedUser) allUsers.push(receivedUser);
+      }
+      
+      return allUsers;
     } catch {
-      return null;
+      return [];
     }
   }
 
-  public static async getUserList(page: number, results: number, seed: string = 'abc'): Promise<TUser[] | null> {
+  public static async getUsers(page: number, results: number, seed: string = 'abc'): Promise<TUser[] | null> {
     try {
-      const url = await fetch(this.URL_API + `?page=${page}&results=${results}&seed=${seed}`);
-      const data: TUserList = await url.json();
+      const response = await fetch(`${import.meta.env.VITE_URL_API}?page=${page}&results=${results}&seed=${seed}`);
+      const data: TUserList = await response.json();
 
-      if (!data || !isUserList(data)) return null;
+      if (!data || !isUsers(data)) return null;
 
       return data.results;
     } catch {

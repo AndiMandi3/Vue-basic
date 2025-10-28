@@ -1,21 +1,21 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
-import User from "@/api/user.api";
+import UserApi from "@/api/user.api";
 import type { TUserPreview } from "@/types/userList.types";
 
 export const useUsersStore = defineStore('user', () => {
   const counterPagination = ref(1);
   const isLoading = ref(false);
-  const users = ref<TUserPreview[] | null>(null);
-  const error = ref<string | null>(null);
+  const users = ref<TUserPreview[] | null>([]);
+  const errorMessage = ref<string | null>('');
 
-  const fetchUsers = async() => {
+  const fetchUsers = async () => {
     isLoading.value = true;
 
     try {
-      users.value = await User.getUsers(counterPagination.value);
+      users.value = await UserApi.getUserList(counterPagination.value);
     } catch {
-      error.value = 'Ошибка загрузки. Повторите попытку позже';
+      errorMessage.value = 'Ошибка загрузки. Повторите попытку позже';
     } finally {
       isLoading.value = false;
     }
@@ -26,13 +26,11 @@ export const useUsersStore = defineStore('user', () => {
     await fetchUsers();
   };
 
-  fetchUsers();
-
   return {
     counterPagination,
     users,
     isLoading,
-    error,
+    errorMessage,
     fetchUsers,
     loadMoreUsers,
   };

@@ -12,11 +12,7 @@ export default function useAuth() {
 
   const setAuth = (isAuth: boolean) => {
     isAuthValue.value = isAuth;
-    if (isAuth) {
-      CookieHelper.setCookie("isAuth", true, 1);
-    } else {
-      CookieHelper.deleteCookie("isAuth");
-    }
+    isAuth ? CookieHelper.setCookie("isAuth", true, 1) : CookieHelper.deleteCookie("isAuth");
   }
 
   onMounted(checkAuth);
