@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useHumansStore } from "@/stores/useHumansStore";
+import { useUsersStore } from "@/stores/useUsersStore";
 
-const humansStore = useHumansStore();
+const UsersStore = useUsersStore();
 
 </script>
 

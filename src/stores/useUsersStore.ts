@@ -1,19 +1,19 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
-import RandomHuman from "@/api/randomHumanApi.ts";
-import type { THumanPreview } from "@/types/humanList.types.ts";
+import User from "@/api/user.api";
+import type { TUserPreview } from "@/types/userList.types";
 
-export const useHumansStore = defineStore('humans', () => {
+export const useUsersStore = defineStore('user', () => {
   const counterPagination = ref(1);
   const isLoading = ref(false);
-  const humans = ref<THumanPreview[] | null>(null);
+  const users = ref<TUserPreview[] | null>(null);
   const error = ref<string | null>(null);
 
-  const fetchHumans = async() => {
+  const fetchUsers = async() => {
     isLoading.value = true;
 
     try {
-      humans.value = await RandomHuman.getHumans(counterPagination.value);
+      users.value = await User.getUsers(counterPagination.value);
     } catch {
       error.value = 'Ошибка загрузки. Повторите попытку позже';
     } finally {
@@ -21,19 +21,19 @@ export const useHumansStore = defineStore('humans', () => {
     }
   };
 
-  const loadMoreHumans = async() => {
+  const loadMoreUsers = async() => {
     counterPagination.value++;
-    await fetchHumans();
+    await fetchUsers();
   };
 
-  fetchHumans()
+  fetchUsers();
 
   return {
     counterPagination,
-    humans,
+    users,
     isLoading,
     error,
-    fetchHumans,
-    loadMoreHumans,
+    fetchUsers,
+    loadMoreUsers,
   };
 });

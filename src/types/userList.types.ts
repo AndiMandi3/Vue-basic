@@ -1,11 +1,11 @@
-type THumanList = {
+type TUserList = {
   info: {
     version: string,
   },
-  results: THuman[]
+  results: TUser[]
 }
 
-type THuman = {
+type TUser = {
   phone: string,
   dob: {
     date: Date,
@@ -28,7 +28,7 @@ type THuman = {
   }
 }
 
-type THumanPreview = {
+type TUserPreview = {
   birthday: string,
   age: number,
   name: string,
@@ -37,4 +37,4 @@ type THumanPreview = {
   phone: string,
 }
 
-export type { THumanList, THuman, THumanPreview }
+export type { TUserList, TUser, TUserPreview }

@@ -1,6 +1,6 @@
-import type { THuman, THumanList } from "@/types/humanList.types.ts";
+import type { TUser, TUserList } from "@/types/userList.types";
 
-function isHumanList(data: unknown): data is THumanList {
+function isUserList(data: unknown): data is TUserList {
   return (
     (data !== null) &&
     (typeof data === "object") &&
@@ -12,7 +12,7 @@ function isHumanList(data: unknown): data is THumanList {
   );
 }
 
-function isHuman(data: unknown): data is THuman {
+function isUser(data: unknown): data is TUser {
   return (
     (data !== null) &&
     (typeof data === "object") &&
@@ -25,6 +25,6 @@ function isHuman(data: unknown): data is THuman {
 }
 
 export {
-  isHumanList,
-  isHuman,
+  isUserList,
+  isUser,
 }
