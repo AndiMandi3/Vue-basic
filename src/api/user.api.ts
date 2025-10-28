@@ -1,43 +1,29 @@
-import { getFormattedBirthday, getFormattedName } from "@/helpers/api.helpers";
+import { getFormattedName } from "@/helpers/api.helper"
+import { getFormattedBirthday } from "@/helpers/date.helper";
 import { isUser, isUsers } from "@/types/guards/userList.guard";
 import type { TUserList, TUser, TUserPreview } from "@/types/userList.types";
 
 export default class UserApi {
-  public static async getUserData(userData: TUser): Promise<TUserPreview | null> {
-    try {
-      if (!userData) return null;
-
-      const receivedData: TUser = userData;
-
-      return {
-        birthday: getFormattedBirthday(receivedData?.dob?.date),
-        age: receivedData?.dob?.age,
-        name: getFormattedName(receivedData?.name?.title, receivedData?.name?.first, receivedData?.name?.last),
-        thumbnail: receivedData?.picture.thumbnail,
-        city: receivedData?.location?.city,
-        phone: receivedData?.phone,
-      }
-    } catch {
-      return null;
+  public static mapUserData(userData: TUser): TUserPreview {
+    return {
+      birthday: getFormattedBirthday(userData.dob.date),
+      age: userData.dob.age,
+      name: getFormattedName(userData.name.title, userData.name.first, userData.name.last),
+      thumbnail: userData.picture.thumbnail,
+      city: userData.location.city,
+      phone: userData.phone,
     }
   }
 
   public static async getUserList(counterPage: number = 1): Promise<TUserPreview[] | []> {
     try {
-      const usersReceived: TUser[] | null = await this.getUsers(counterPage, 10);
-      const allUsers: TUserPreview[] = [];
+      const userList = await this.getUsers(counterPage, 10);
 
-      if (!usersReceived) return [];
+      if (!userList) return [];
 
-      for (const user of usersReceived) {
-        if (!user || !isUser(user)) continue;
-
-        const receivedUser: TUserPreview | null = await this.getUserData(user);
-
-        if (receivedUser) allUsers.push(receivedUser);
-      }
-      
-      return allUsers;
+      return userList
+        .filter(user => user && isUser(user))
+        .map(user => this.mapUserData(user));
     } catch {
       return [];
     }

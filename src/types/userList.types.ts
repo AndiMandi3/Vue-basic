@@ -1,11 +1,11 @@
-type TUserList = {
+export type TUserList = {
   info: {
     version: string,
   },
   results: TUser[]
 }
 
-type TUser = {
+export type TUser = {
   phone: string,
   dob: {
     date: Date,
@@ -28,7 +28,7 @@ type TUser = {
   }
 }
 
-type TUserPreview = {
+export type TUserPreview = {
   birthday: string,
   age: number,
   name: string,
@@ -36,5 +36,3 @@ type TUserPreview = {
   city: string,
   phone: string,
 }
-
-export type { TUserList, TUser, TUserPreview }
