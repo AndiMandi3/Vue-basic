@@ -2,7 +2,6 @@ import { getFormattedBirthday, getFormattedName } from "@/helpers/api.helpers";
 import { isHuman, isHumanList } from "@/types/guards/humanList.guard.ts";
 import type { THumanList, THuman, THumanPreview } from "@/types/humanList.types.ts";
 
-
 export default class RandomHuman {
   static readonly URL_API: string = import.meta.env.VITE_URL_API;
 
