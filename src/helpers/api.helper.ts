@@ -1,3 +1,9 @@
-export function getFormattedName(title: string, first: string, last: string) {
-  return `${title} ${first} ${last}`;
+export function getFormattedBirthday(isoDate: Date) {
+  const date = new Date(isoDate);
+
+  return date.toLocaleDateString('ru-RU', {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
 }

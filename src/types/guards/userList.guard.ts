@@ -4,9 +4,6 @@ export function isUsers(data: unknown): data is TUserList {
   return (
     (data !== null) &&
     (typeof data === "object") &&
-    ("info" in data) &&
-    (typeof data.info === "object") &&
-    (data.info !== null) &&
     ("results" in data) &&
     (data.results !== null)
   );
@@ -18,8 +15,6 @@ export function isUser(data: unknown): data is TUser {
     (typeof data === "object") &&
     ("id" in data) &&
     (data.id !== null) &&
-    (typeof data.id === "object") &&
-    ("name" in data.id) &&
-    ("value" in data.id)
+    (typeof data.id === "object")
   );
 }

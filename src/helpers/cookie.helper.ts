@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 
-export default class CookieHelper {
+export class CookieHelper {
 	public static setCookie(key: string, value: boolean | string | number, expireTime: number) {
 		Cookies.set(key, value.toString(), { expires: expireTime })
 	}

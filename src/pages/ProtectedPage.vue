@@ -7,15 +7,23 @@ const usersStore = useUsersStore();
 const { users, isLoading, errorMessage } = storeToRefs(usersStore);
 const { fetchUsers, loadMoreUsers } = usersStore;
 
-onMounted(async () => {
-  fetchUsers();
-})
+onMounted(async () => fetchUsers());
 </script>
 
 <template>
-  <p>Я защищенная страница!</p>
+  <div class="protected-page">
+    <p>Я защищенная страница!</p>
+    <p v-if="errorMessage">{{ errorMessage }}</p>
+    <p>Число загруженных людей: {{ users.length }}</p>
+    <p>Загружается? <strong>{{ isLoading ? "Да" : "Нет" }}</strong></p>
+    <button type="button" :disabled="isLoading" @click="loadMoreUsers">Загрузить еще</button>
+  </div>
+  
+  
 </template>
 
 <style scoped lang="scss">
-
+.protected-page {
+  padding: 60px 20px;
+}
 </style>

@@ -1,5 +1,5 @@
 import { ref, onMounted, computed } from "vue";
-import CookieHelper from "@/helpers/cookie.helper.ts";
+import { CookieHelper } from "@/helpers/cookie.helper.ts";
 
 const isAuthValue = ref(false);
 
