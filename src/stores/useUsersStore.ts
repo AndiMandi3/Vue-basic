@@ -1,39 +1,43 @@
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 import { UserApi } from "@/api/user.api";
 import type { TUserPreview } from "@/types/userList.types";
 
 export const useUsersStore = defineStore('users', () => {
-  const pageNumber = ref(1);
-  const isLoading = ref(false);
-  const users = ref<TUserPreview[]>([]);
-  const errorMessage = ref('');
+  const pageNumberValue = ref(1);
+  const isLoadingValue = ref(false);
+  const usersArray = ref<TUserPreview[]>([]);
+  const errorMessageValue = ref('');
+
+  const isLoading = computed(() => isLoadingValue.value);
+  const users = computed(() => usersArray.value);
+  const errorMessage = computed(() => errorMessageValue.value);
+  const pageNumber = computed(() => pageNumberValue.value);
 
   const fetchUsers = async (): Promise<void> => {
-    isLoading.value = true;
-    errorMessage.value = '';
+    isLoadingValue.value = true;
+    errorMessageValue.value = '';
 
     const newUsers = await UserApi.getUsers(pageNumber.value, 10);
     
-    if(newUsers) {
-      users.value.push(...newUsers)
+    if(newUsers.length) {
+      usersArray.value.push(...newUsers)
     } else {
-      errorMessage.value = "Ошибка загрузки данных. Повторите попытку позже";
+      errorMessageValue.value = "Ошибка загрузки данных. Повторите попытку позже";
     }
 
-    isLoading.value = false;
+    isLoadingValue.value = false;
   };
 
   const loadMoreUsers = async (): Promise<void> => {
-    pageNumber.value++;
+    pageNumberValue.value++;
     await fetchUsers();
   };
 
   return {
-    pageNumber,
-    errorMessage,
-    users,
     isLoading,
+    users,
+    errorMessage,
     fetchUsers,
     loadMoreUsers,
   };
