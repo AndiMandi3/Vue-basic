@@ -21,7 +21,8 @@ export const useUsersStore = defineStore('users', () => {
     const newUsers = await UserApi.getUsers(pageNumber.value, 10);
     
     if(newUsers.length) {
-      usersArray.value.push(...newUsers)
+      usersArray.value.push(...newUsers);
+      pageNumberValue.value++;
     } else {
       errorMessageValue.value = "Ошибка загрузки данных. Повторите попытку позже";
     }
@@ -29,16 +30,16 @@ export const useUsersStore = defineStore('users', () => {
     isLoadingValue.value = false;
   };
 
-  const loadMoreUsers = async (): Promise<void> => {
-    pageNumberValue.value++;
-    await fetchUsers();
-  };
+  const resetUsers = () => {
+    usersArray.value = [];
+    pageNumberValue.value = 1;
+  }
 
   return {
     isLoading,
     users,
     errorMessage,
     fetchUsers,
-    loadMoreUsers,
+    resetUsers,
   };
 });
