@@ -20,7 +20,7 @@ export const useUsersStore = defineStore('users', () => {
 
     const newUsers = await UserApi.getUsers(pageNumber.value, 10);
     
-    if(newUsers.length) {
+    if(newUsers) {
       usersArray.value.push(...newUsers);
       pageNumberValue.value++;
     } else {
