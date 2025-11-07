@@ -7,7 +7,7 @@ export const useUsersStore = defineStore('users', () => {
   const pageNumberValue = ref(1);
   const isLoadingValue = ref(false);
   const usersArray = ref<TUserPreview[]>([]);
-  const errorMessageValue = ref('');
+  const errorMessageValue = ref<string | null>('');
 
   const isLoading = computed(() => isLoadingValue.value);
   const users = computed(() => usersArray.value);
@@ -19,13 +19,15 @@ export const useUsersStore = defineStore('users', () => {
     errorMessageValue.value = '';
 
     const data = await UserApi.getUsers(pageNumber.value, 10);
-    
-    if(data.result.length) {
-      usersArray.value.push(...data.result);
-      pageNumberValue.value++;
-    }
-    else errorMessageValue.value = data.error;
 
+    if(data.error) {
+      errorMessageValue.value = data.error;
+      isLoadingValue.value = false;
+      return;
+    }
+
+    usersArray.value.push(...data.result);
+    pageNumberValue.value++;
     isLoadingValue.value = false;
   };
 

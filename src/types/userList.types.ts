@@ -39,5 +39,5 @@ export type TUserPreview = {
 
 export type TUserResult = {
   result: TUserPreview[],
-  error: string,
+  error: string | null,
 }

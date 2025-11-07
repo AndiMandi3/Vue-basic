@@ -11,23 +11,24 @@ export class UserApi {
       
       const data = await response.json();
 
-      if (!data || !isUsers(data)) return {
-        result: [],
-        error: 'Invalid data format from API',
-      };
-
+      if (!data || !isUsers(data)) {
+        return {
+          result: [],
+          error: null,
+        };
+      }
       const users = data.results
         .filter(user => user && isUser(user))
         .map(user => ApiDataMapper.mapUserData(user));
 
       return {
         result: users,
-        error: '',
+        error: null,
       }
     } catch(e)  {
       return {
         result: [],
-        error: e instanceof Error ? e.message : "Unknown error occured",
+        error: e instanceof Error ? e.message : "Unknown error occurred",
       };
     }
   }

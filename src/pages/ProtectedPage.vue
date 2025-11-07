@@ -7,8 +7,8 @@ const usersStore = useUsersStore();
 const { users, isLoading, errorMessage } = storeToRefs(usersStore);
 const { fetchUsers, resetUsers } = usersStore;
 
-onMounted(async () => fetchUsers());
-onUnmounted(() => resetUsers());
+onMounted(fetchUsers);
+onUnmounted(resetUsers);
 </script>
 
 <template>
