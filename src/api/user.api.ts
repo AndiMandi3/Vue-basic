@@ -1,9 +1,9 @@
 import { isUser, isUsers } from "@/types/guards/userList.guard.ts";
-import type { TUserPreview } from "@/types/userList.types.ts";
+import type { TUserResult } from "@/types/userList.types.ts";
 import { ApiDataMapper } from "@/helpers/api-data-mapper.helper";
 
 export class UserApi {
-  public static async getUsers(page: number, results: number, seed: string = 'abc'): Promise<TUserPreview[]> {
+  public static async getUsers(page: number, results: number, seed: string = 'abc'): Promise<TUserResult> {
     try {
       const apiUrl = import.meta.env.VITE_URL_API;
       const query = `page=${page}&results=${results}&seed=${seed}`;
@@ -11,13 +11,24 @@ export class UserApi {
       
       const data = await response.json();
 
-      if (!data || !isUsers(data)) throw new Error ("Ошибка загрузки данных. Повторите попытку позже");
+      if (!data || !isUsers(data)) return {
+        result: [],
+        error: 'Invalid data format from API',
+      };
 
-      return data.results
+      const users = data.results
         .filter(user => user && isUser(user))
         .map(user => ApiDataMapper.mapUserData(user));
-    } catch  {
-      return [];
+
+      return {
+        result: users,
+        error: '',
+      }
+    } catch(e)  {
+      return {
+        result: [],
+        error: e instanceof Error ? e.message : "Unknown error occured",
+      };
     }
   }
 }

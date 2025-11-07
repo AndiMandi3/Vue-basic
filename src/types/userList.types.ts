@@ -29,10 +29,15 @@ export type TUser = {
 }
 
 export type TUserPreview = {
-  birthday: string,
-  age: number,
-  name: string,
-  thumbnail: string,
-  city: string,
-  phone: string,
+    birthday: string,
+    age: number,
+    name: string,
+    thumbnail: string,
+    city: string,
+    phone: string,
+}
+
+export type TUserResult = {
+  result: TUserPreview[],
+  error: string,
 }

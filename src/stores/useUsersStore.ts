@@ -18,14 +18,13 @@ export const useUsersStore = defineStore('users', () => {
     isLoadingValue.value = true;
     errorMessageValue.value = '';
 
-    const newUsers = await UserApi.getUsers(pageNumber.value, 10);
+    const data = await UserApi.getUsers(pageNumber.value, 10);
     
-    if(newUsers) {
-      usersArray.value.push(...newUsers);
+    if(data.result.length) {
+      usersArray.value.push(...data.result);
       pageNumberValue.value++;
-    } else {
-      errorMessageValue.value = "Ошибка загрузки данных. Повторите попытку позже";
     }
+    else errorMessageValue.value = data.error;
 
     isLoadingValue.value = false;
   };
