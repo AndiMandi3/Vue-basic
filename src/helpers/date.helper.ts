@@ -1,4 +1,4 @@
-export class FormatDate {
+export class DateHelper {
   public static getFormattedBirthday(isoDate: Date) {
     return new Date(isoDate).toLocaleDateString('ru-RU', {
       year: "numeric",

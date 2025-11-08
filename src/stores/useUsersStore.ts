@@ -34,6 +34,7 @@ export const useUsersStore = defineStore('users', () => {
   const resetUsers = () => {
     usersArray.value = [];
     pageNumberValue.value = 1;
+    errorMessageValue.value = null;
   }
 
   return {

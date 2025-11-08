@@ -22,10 +22,6 @@ export type TUser = {
   location: {
     city: string,
   },
-  id: {
-    name: string,
-    value: string,
-  }
 }
 
 export type TUserPreview = {

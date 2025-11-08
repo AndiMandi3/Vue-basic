@@ -4,7 +4,7 @@ import { ApiDataMapper } from "@/helpers/api-data-mapper.helper";
 import { EnvConfig } from "@/consts/env.const.ts";
 
 export class UserApi {
-  public static async getUsers(page: number, results: number, seed: string = 'abc'): Promise<[TUserPreview[] | [], string | null]> {
+  public static async getUsers(page: number, results: number, seed: string = 'abc'): Promise<[TUserPreview[], string | null]> {
     try {
       const apiUrl = EnvConfig.BASE_URL;
       const query = `page=${page}&results=${results}&seed=${seed}`;
@@ -16,8 +16,8 @@ export class UserApi {
         return [[], null];
       }
       const users = data.results
-        .filter(user => user && isUser(user))
-        .map(user => ApiDataMapper.mapUserData(user));
+        .filter(isUser)
+        .map(ApiDataMapper.mapUserData);
 
       return [users, null];
     } catch(e)  {
