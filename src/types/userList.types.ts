@@ -36,8 +36,3 @@ export type TUserPreview = {
     city: string,
     phone: string,
 }
-
-export type TUserResult = {
-  result: TUserPreview[],
-  error: string | null,
-}
