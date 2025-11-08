@@ -7,7 +7,7 @@ export const useUsersStore = defineStore('users', () => {
   const pageNumberValue = ref(1);
   const isLoadingValue = ref(false);
   const usersArray = ref<TUserPreview[]>([]);
-  const errorMessageValue = ref<string | null>('');
+  const errorMessageValue = ref<string | null>(null);
 
   const isLoading = computed(() => isLoadingValue.value);
   const users = computed(() => usersArray.value);
@@ -16,17 +16,17 @@ export const useUsersStore = defineStore('users', () => {
 
   const fetchUsers = async (): Promise<void> => {
     isLoadingValue.value = true;
-    errorMessageValue.value = '';
+    errorMessageValue.value = null;
 
-    const data = await UserApi.getUsers(pageNumber.value, 10);
+    const [response, error] = await UserApi.getUsers(pageNumber.value, 10);
 
-    if(data.error) {
-      errorMessageValue.value = data.error;
+    if(error) {
+      errorMessageValue.value = error;
       isLoadingValue.value = false;
       return;
     }
 
-    usersArray.value.push(...data.result);
+    usersArray.value.push(...response);
     pageNumberValue.value++;
     isLoadingValue.value = false;
   };
