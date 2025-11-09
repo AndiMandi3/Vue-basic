@@ -1,6 +1,6 @@
 import { isUser, isUsers } from "@/types/guards/userList.guard.ts";
 import type { TUserPreview } from "@/types/userList.types.ts";
-import { ApiDataMapper } from "@/helpers/api-data-mapper.helper";
+import { ApiDataMapper } from "@/helpers/apiDataMapper.helper.ts";
 import { EnvConfig } from "@/consts/env.const.ts";
 
 export class UserApi {
