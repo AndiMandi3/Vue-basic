@@ -1,6 +1,6 @@
 import { createWebHistory, createRouter } from "vue-router";
 import { RouteName, RouteTitle } from "@/consts/router.const.ts";
-import CookieHelper from "./helpers/cookie.helper";
+import { CookieHelper } from "./helpers/cookie.helper";
 
 const MainPage = () => import("@/layouts/BaseLayout.vue");
 const PublicPage = () => import("@/pages/PublicPage.vue");
