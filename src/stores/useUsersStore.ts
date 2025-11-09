@@ -4,37 +4,37 @@ import { UserApi } from "@/api/user.api";
 import type { TUserPreview } from "@/types/userList.types";
 
 export const useUsersStore = defineStore('users', () => {
-  const pageNumberValue = ref(1);
-  const isLoadingValue = ref(false);
-  const usersArray = ref<TUserPreview[]>([]);
-  const errorMessageValue = ref<string | null>(null);
+  const pageNumberState = ref(1);
+  const isLoadingState = ref(false);
+  const usersArrayState = ref<TUserPreview[]>([]);
+  const errorMessageState = ref<string | null>(null);
 
-  const isLoading = computed(() => isLoadingValue.value);
-  const users = computed(() => usersArray.value);
-  const errorMessage = computed(() => errorMessageValue.value);
-  const pageNumber = computed(() => pageNumberValue.value);
+  const isLoading = computed(() => isLoadingState.value);
+  const users = computed(() => usersArrayState.value);
+  const errorMessage = computed(() => errorMessageState.value);
+  const pageNumber = computed(() => pageNumberState.value);
 
   const fetchUsers = async (): Promise<void> => {
-    isLoadingValue.value = true;
-    errorMessageValue.value = null;
+    isLoadingState.value = true;
+    errorMessageState.value = null;
 
     const [response, error] = await UserApi.getUsers(pageNumber.value, 10);
 
     if(error) {
-      errorMessageValue.value = error;
-      isLoadingValue.value = false;
+      errorMessageState.value = error;
+      isLoadingState.value = false;
       return;
     }
 
-    usersArray.value.push(...response);
-    pageNumberValue.value++;
-    isLoadingValue.value = false;
+    usersArrayState.value.push(...response);
+    pageNumberState.value++;
+    isLoadingState.value = false;
   };
 
-  const resetUsers = () => {
-    usersArray.value = [];
-    pageNumberValue.value = 1;
-    errorMessageValue.value = null;
+  const resetUsers = (): void => {
+    usersArrayState.value = [];
+    pageNumberState.value = 1;
+    errorMessageState.value = null;
   }
 
   return {

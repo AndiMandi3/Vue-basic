@@ -20,8 +20,8 @@ export class UserApi {
         .map(ApiDataMapper.mapUserData);
 
       return [users, null];
-    } catch(e)  {
-      return [[], e instanceof Error ? e.message : "Unknown error occurred"]
+    } catch(error: unknown)  {
+      return [[], error instanceof Error ? error.message : "Unknown error occurred"]
     }
   }
 }
