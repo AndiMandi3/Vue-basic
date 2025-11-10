@@ -26,17 +26,12 @@ export type TUser = {
 
 export type TUserPreview = {
   mainInfo: {
-    name: TUserValues,
-    thumbnail: TUserValues,
+    name: string,
+    thumbnail: string,
   },
   extraInfo: {
-    birthday: TUserValues,
-    city: TUserValues,
-    phone: TUserValues,
+    birthday: string,
+    city: string,
+    phone: string,
   },
-}
-
-type TUserValues = {
-  value: string,
-  component?: any,
 }
