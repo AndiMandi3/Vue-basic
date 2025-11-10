@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { TUserPreview } from '@/types/userList.types';
 import AnonymousAvatar from "@/assets/images/anonymous-avatar-img.png";
-import LineDivider from "@/pages/protectedPage/components/LineDivider.vue";
+import LineDivider from "@/components/common/LineDivider.vue";
 import CalendarIcon from "@/assets/images/calendar-icon.svg?component";
 import LocationIcon from "@/assets/images/location-icon.svg?component";
 import PhoneIcon from "@/assets/images/phone-icon.svg?component";
@@ -23,11 +23,17 @@ defineProps<IProps>();
     <LineDivider />
 
     <div class="user-item__footer">
-      <div class="user-item__footer-element" v-for="([key, value]) in Object.entries(item.extraInfo)" :key="key">
-        <CalendarIcon v-if="key === 'birthday'" />
-        <LocationIcon v-if="key === 'city'" />
-        <PhoneIcon v-if="key === 'phone'" />
-        {{ value }}
+      <div class="user-item__footer-element">
+        <CalendarIcon />
+        <p>{{ item.extraInfo.birthday }}</p>
+      </div>
+      <div class="user-item__footer-element">
+        <LocationIcon />
+        <p>{{ item.extraInfo.city }}</p>
+      </div>
+      <div class="user-item__footer-element">
+        <PhoneIcon />
+        <p>{{ item.extraInfo.phone }}</p>
       </div>
     </div>
   </div>

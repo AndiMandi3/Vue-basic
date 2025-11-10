@@ -9,7 +9,7 @@ export class ApiDataMapper {
         thumbnail: userData.picture.thumbnail,
       },
       extraInfo: {
-        birthday: DateHelper.getFormattedBirthday(userData.dob.date) + ` (${userData.dob.age})`,
+        birthday: `${DateHelper.getFormattedBirthday(userData.dob.date)} (${userData.dob.age})`,
         city: userData.location.city,
         phone: userData.phone,
       }

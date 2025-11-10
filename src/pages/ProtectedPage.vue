@@ -4,7 +4,7 @@ import { storeToRefs } from "pinia";
 import { useUsersStore } from "@/stores/useUsersStore";
 import BaseBlock from "@/components/ui/BaseBlock.vue";
 import BaseButton from "@/components/ui/BaseButton.vue";
-import UserList from "./protectedPage/components/userList.vue";
+import UserList from "@/pages/protectedPage/components/UserList.vue";
 
 const usersStore = useUsersStore();
 const { users, isLoading, errorMessage } = storeToRefs(usersStore);
@@ -41,7 +41,9 @@ onUnmounted(resetUsers);
   }
 
   &__button {
-    text-align: end;
+    display: flex;
+    justify-content: center;
+    align-items: center ;
   }
 }
 </style>

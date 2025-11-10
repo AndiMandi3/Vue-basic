@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { TUserPreview } from '@/types/userList.types';
-import UserListItem from "@/pages/protectedPage/components/userListItem.vue";
+import UserListItem from "@/pages/protectedPage/components/UserListItem.vue";
 
 interface IProps {
   data: TUserPreview[]
