@@ -25,10 +25,18 @@ export type TUser = {
 }
 
 export type TUserPreview = {
-    birthday: string,
-    age: number,
-    name: string,
-    thumbnail: string,
-    city: string,
-    phone: string,
+  mainInfo: {
+    name: TUserValues,
+    thumbnail: TUserValues,
+  },
+  extraInfo: {
+    birthday: TUserValues,
+    city: TUserValues,
+    phone: TUserValues,
+  },
+}
+
+type TUserValues = {
+  value: string,
+  component?: any,
 }
