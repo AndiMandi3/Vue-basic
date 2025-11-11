@@ -25,13 +25,9 @@ export type TUser = {
 }
 
 export type TUserPreview = {
-  mainInfo: {
-    name: string,
-    thumbnail: string,
-  },
-  extraInfo: {
-    birthday: string,
-    city: string,
-    phone: string,
-  },
+  name: string,
+  thumbnail: string,
+  birthday: string,
+  city: string,
+  phone: string,
 }

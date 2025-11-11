@@ -16,8 +16,8 @@ defineProps<IProps>();
 <template>
   <div class="user-item">
     <div class="user-item__header">
-      <img class="user-item__header-avatar" :src="item.mainInfo.thumbnail || AnonymousAvatar" alt="User avatar" loading="lazy">
-      <h4 class="user-item__header-name">{{ item.mainInfo.name }}</h4>
+      <img class="user-item__header-avatar" :src="item.thumbnail || AnonymousAvatar" alt="User avatar" loading="lazy">
+      <h4 class="user-item__header-name">{{ item.name }}</h4>
     </div>
 
     <LineDivider />
@@ -25,15 +25,15 @@ defineProps<IProps>();
     <div class="user-item__footer">
       <div class="user-item__footer-element">
         <CalendarIcon />
-        <p>{{ item.extraInfo.birthday }}</p>
+        <p>{{ item.birthday }}</p>
       </div>
       <div class="user-item__footer-element">
         <LocationIcon />
-        <p>{{ item.extraInfo.city }}</p>
+        <p>{{ item.city }}</p>
       </div>
       <div class="user-item__footer-element">
         <PhoneIcon />
-        <p>{{ item.extraInfo.phone }}</p>
+        <p>{{ item.phone }}</p>
       </div>
     </div>
   </div>
@@ -64,6 +64,11 @@ defineProps<IProps>();
     display: flex;
     gap: 20px;
     padding: 20px 0;
+
+    &-element {
+      display: flex;
+      gap: 10px;
+    }
   }
 }
 </style>
