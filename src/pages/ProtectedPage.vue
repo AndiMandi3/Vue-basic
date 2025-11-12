@@ -18,13 +18,14 @@ onUnmounted(resetUsers);
 <template>
   <div class="protected-page">
     <h2 class="protected-page__title">Защищенная страница</h2>
+
     <ErrorBlock v-if="errorMessage">
       {{ errorMessage }}
     </ErrorBlock>
 
     <div class="protected-page__users">
-      <UsersLoader :items=10 />
-      <div class="protected-page__users-elements">
+      <UsersLoader v-if="isLoading" :items=10 />
+      <div v-else class="protected-page__users-elements">
         <UserCard v-for="(user, index) in users" :key="index" :user="user" />
       </div>
     </div>
