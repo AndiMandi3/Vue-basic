@@ -10,23 +10,13 @@ import InfoIcon from "@/assets/images/info-icon.svg?component";
 </template>
 
 <style scoped lang="scss">
-.base-block {
+.info-block {
   display: flex;
   align-items: center;
-  gap: 45%;
+  gap: 730px;
   border-radius: 10px;
   border: 2px solid;
   padding: 20px;
   margin-bottom: 20px;
-  
-  &--error {
-    background-color: $danger-background-color;
-    border-color: $danger-color;
-  }
-
-  &--info {
-    background-color: $info-background-color;
-    border-color: $info-color;
-  }
 }
 </style>

@@ -13,7 +13,7 @@ import ExclamationIcon from "@/assets/images/exclamation-icon.svg?component";
 .error-block {
   display: flex;
   align-items: center;
-  gap: 45%;
+  gap: 730px;
   border-radius: 10px;
   border: 2px solid;
   padding: 20px;

@@ -26,7 +26,7 @@ export type TUser = {
 
 export type TUserPreview = {
   name: string,
-  thumbnail: string,
+  avatar: string,
   birthday: string,
   city: string,
   phone: string,

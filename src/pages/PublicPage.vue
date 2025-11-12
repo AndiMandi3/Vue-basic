@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import MainInfo from "@/pages/publicPage/components/MainInfo.vue";
-import LineDivider from "../components/common/LineDivider.vue";
-import ContactInfo from "./publicPage/components/ContactInfo.vue";
+import LineDivider from "@/components/common/LineDivider.vue";
+import ContactInfo from "@/pages/publicPage/components/ContactInfo.vue";
 </script>
 
 <template>

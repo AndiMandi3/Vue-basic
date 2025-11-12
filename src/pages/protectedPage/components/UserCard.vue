@@ -7,41 +7,44 @@ import LocationIcon from "@/assets/images/location-icon.svg?component";
 import PhoneIcon from "@/assets/images/phone-icon.svg?component";
 
 interface IProps {
-  item: TUserPreview,
+  user: TUserPreview,
 }
 
 defineProps<IProps>();
 </script>
 
 <template>
-  <div class="user-item">
-    <div class="user-item__header">
-      <img class="user-item__header-avatar" :src="item.thumbnail || AnonymousAvatar" alt="User avatar" loading="lazy">
-      <h4 class="user-item__header-name">{{ item.name }}</h4>
+  <div class="user-card">
+    <div class="user-card__header">
+      <img class="user-card__header-avatar" :src="user.avatar || AnonymousAvatar" alt="User avatar" loading="lazy">
+      <h4 class="user-card__header-name">{{ user.name }}</h4>
     </div>
 
     <LineDivider />
 
-    <div class="user-item__footer">
-      <div class="user-item__footer-element">
+    <div class="user-card__footer">
+      <div class="user-card__footer-element">
         <CalendarIcon />
-        <p>{{ item.birthday }}</p>
+        <p>{{ user.birthday }}</p>
       </div>
-      <div class="user-item__footer-element">
+      <div class="user-card__footer-element">
         <LocationIcon />
-        <p>{{ item.city }}</p>
+        <p>{{ user.city }}</p>
       </div>
-      <div class="user-item__footer-element">
+      <div class="user-card__footer-element">
         <PhoneIcon />
-        <p>{{ item.phone }}</p>
+        <p>{{ user.phone }}</p>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-.user-item {
+.user-card {
   display: flex;
+  flex-grow: 1;
+  max-width: 842.5px;
+  width: 100%;
   border: 1px solid $gray-color;
   border-radius: 10px;
   flex-direction: column;
