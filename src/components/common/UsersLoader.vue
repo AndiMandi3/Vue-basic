@@ -37,8 +37,6 @@ defineProps<IProps>();
   &__item {
     display: flex;
     flex-grow: 1;
-    width: 100%;
-    max-width: 842.5px;
     border: 1px solid $gray-color;
     border-radius: 10px;
     margin-bottom: 20px;
