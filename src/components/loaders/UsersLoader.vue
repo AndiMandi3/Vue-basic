@@ -2,7 +2,7 @@
 import { ContentLoader } from "vue-content-loader";
 
 interface IProps {
-  items: number,
+  count: number,
 }
 
 defineProps<IProps>();
@@ -10,7 +10,14 @@ defineProps<IProps>();
 
 <template>
   <div class="users-loader">
-    <ContentLoader v-for="item in items" :key="item" :width="842.5" :height="167" :speed="2" class="users-loader__item">
+    <ContentLoader 
+      v-for="item in count" 
+      :key="item" 
+      :width="842.5" 
+      :height="167" 
+      :speed="2" 
+      class="users-loader__item"
+    >
       <circle cx="40" cy="48" r="24" />
       <rect x="85" y="40" rx="4" ry="4" width="200" height="20" />
 
@@ -37,6 +44,8 @@ defineProps<IProps>();
   &__item {
     display: flex;
     flex-grow: 1;
+    max-width: 842.5px;
+    width: 100%;
     border: 1px solid $gray-color;
     border-radius: 10px;
     margin-bottom: 20px;

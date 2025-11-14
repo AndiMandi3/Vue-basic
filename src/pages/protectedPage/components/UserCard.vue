@@ -16,22 +16,22 @@ defineProps<IProps>();
 <template>
   <div class="user-card">
     <div class="user-card__header">
-      <img class="user-card__header-avatar" :src="user.avatar || AnonymousAvatar" alt="User avatar" loading="lazy">
-      <h4 class="user-card__header-name">{{ user.name }}</h4>
+      <img class="user-card__avatar" :src="user.avatar || AnonymousAvatar" alt="User avatar" loading="lazy">
+      <h4 class="user-card__name">{{ user.name }}</h4>
     </div>
 
     <LineDivider />
 
-    <div class="user-card__footer">
-      <div class="user-card__footer-element">
+    <div class="user-card__info">
+      <div class="user-card__info-element">
         <CalendarIcon />
         <p>{{ user.birthday }}</p>
       </div>
-      <div class="user-card__footer-element">
+      <div class="user-card__info-element">
         <LocationIcon />
         <p>{{ user.city }}</p>
       </div>
-      <div class="user-card__footer-element">
+      <div class="user-card__info-element">
         <PhoneIcon />
         <p>{{ user.phone }}</p>
       </div>
@@ -55,15 +55,15 @@ defineProps<IProps>();
     display: flex;
     align-items: center;
     gap: 20px;
-
-    &-avatar {
-      border-radius: 50%;
-      width: 48px;
-      height: 48px;
-    }
   }
 
-  &__footer {
+  &__avatar {
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+  }
+
+  &__info {
     display: flex;
     gap: 20px;
     padding: 20px 0;

@@ -4,19 +4,27 @@ import InfoIcon from "@/assets/images/info-icon.svg?component";
 
 <template>
   <div class="info-block">
-    <InfoIcon />
-    <slot />
+    <InfoIcon class="info-block__icon" />
+    <p class="info-block__text">
+      <slot />
+    </p>
   </div>
 </template>
 
 <style scoped lang="scss">
 .info-block {
   display: flex;
-  align-items: center;
-  gap: 730px;
   border-radius: 10px;
   border: 2px solid;
   padding: 20px;
   margin-bottom: 20px;
+
+  &__icon {
+    flex-shrink: 0;
+  }
+
+  &__text {
+    flex: 1;
+  }
 }
 </style>

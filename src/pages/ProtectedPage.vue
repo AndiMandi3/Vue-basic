@@ -5,7 +5,7 @@ import { useUsersStore } from "@/stores/useUsersStore";
 import ErrorBlock from "@/components/ui/ErrorBlock.vue";
 import BaseButton from "@/components/ui/BaseButton.vue";
 import UserCard from "@/pages/protectedPage/components/UserCard.vue";
-import UsersLoader from "@/components/common/UsersLoader.vue";
+import UsersLoader from "@/components/loaders/UsersLoader.vue";
 
 const usersStore = useUsersStore();
 const { users, isLoading, errorMessage } = storeToRefs(usersStore);
@@ -23,9 +23,9 @@ onUnmounted(resetUsers);
       {{ errorMessage }}
     </ErrorBlock>
 
-    <div class="protected-page__users">
-      <UsersLoader v-if="isLoading" :items=10 />
-      <div v-else class="protected-page__users-elements">
+    <div class="protected-page__content">
+      <UsersLoader v-if="isLoading" :count=10 />
+      <div v-else class="protected-page__users">
         <UserCard v-for="(user, index) in users" :key="index" :user="user" />
       </div>
     </div>
@@ -53,12 +53,10 @@ onUnmounted(resetUsers);
     align-items: center;
   }
 
-  &__users { 
-    &-elements {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
+  &__users {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
   }
 }
 </style>
