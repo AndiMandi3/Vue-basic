@@ -41,7 +41,7 @@ const userData = [
           :key="index"
           :value="item.value"
       >
-        <template #prepand>
+        <template #prepend>
           <component :is="item.component" />
         </template>
 

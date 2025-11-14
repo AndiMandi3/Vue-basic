@@ -1,6 +1,6 @@
 <script setup lang="ts">
 interface ISlots {
-  prepand(): any,
+  prepend(): any,
   append?(): any,
 }
 
@@ -14,7 +14,7 @@ defineProps<IProps>();
 
 <template>
   <div>
-    <slot name="prepand" class="contact-item" />
+    <slot name="prepend" class="contact-item" />
     {{ value }}
     <slot name="append" />
   </div>
