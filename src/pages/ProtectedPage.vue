@@ -2,6 +2,10 @@
 import { onMounted, onUnmounted } from "vue";
 import { storeToRefs } from "pinia";
 import { useUsersStore } from "@/stores/useUsersStore";
+import ErrorBlock from "@/components/ui/ErrorBlock.vue";
+import BaseButton from "@/components/ui/BaseButton.vue";
+import UserCard from "@/pages/protectedPage/components/UserCard.vue";
+import UsersLoader from "@/pages/protectedPage/components/UsersLoader.vue";
 
 const usersStore = useUsersStore();
 const { users, isLoading, errorMessage } = storeToRefs(usersStore);
@@ -13,16 +17,51 @@ onUnmounted(resetUsers);
 
 <template>
   <div class="protected-page">
-    <p>Я защищенная страница!</p>
-    <p v-if="errorMessage">{{ errorMessage }}</p>
-    <p>Число загруженных людей: {{ users.length }}</p>
-    <p>Загружается? <strong>{{ isLoading ? "Да" : "Нет" }}</strong></p>
-    <button type="button" :disabled="isLoading" @click="fetchUsers">Загрузить еще</button>
+    <div class="protected-page__title">Защищенная страница</div>
+
+    <ErrorBlock v-if="errorMessage">
+      {{ errorMessage }}
+    </ErrorBlock>
+
+    <UsersLoader v-if="isLoading" :count=10 />
+    <div v-else class="protected-page__users">
+      <UserCard class="protected-page__user" v-for="(user, index) in users" :key="index" :user="user" />
+    </div>
+
+    <div class="protected-page__button">
+      <BaseButton type="primary" :is-disabled="isLoading" @click="fetchUsers">
+        Загрузить еще
+      </BaseButton>
+    </div>
   </div>
 </template>
 
 <style scoped lang="scss">
 .protected-page {
-  padding: 60px 20px;
+  padding: 60px 100px;
+
+  &__title {
+    font-size: $font-size-header;
+    font-weight: $bold-font;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  &__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__users {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  &__user {
+    max-width: 872.5px;
+    width: 100%;
+  }
 }
 </style>
