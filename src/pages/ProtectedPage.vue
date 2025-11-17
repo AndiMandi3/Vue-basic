@@ -23,11 +23,9 @@ onUnmounted(resetUsers);
       {{ errorMessage }}
     </ErrorBlock>
 
-    <div class="protected-page__content">
-      <UsersLoader v-if="isLoading" :count=10 />
-      <div v-else class="protected-page__users">
-        <UserCard v-for="(user, index) in users" :key="index" :user="user" />
-      </div>
+    <UsersLoader v-if="isLoading" :count=10 />
+    <div v-else class="protected-page__users">
+      <UserCard class="protected-page__user" v-for="(user, index) in users" :key="index" :user="user" />
     </div>
 
     <div class="protected-page__button">
@@ -59,6 +57,11 @@ onUnmounted(resetUsers);
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+  }
+
+  &__user {
+    max-width: 872.5px;
+    width: 100%;
   }
 }
 </style>

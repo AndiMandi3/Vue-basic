@@ -43,8 +43,6 @@ defineProps<IProps>();
 .user-card {
   display: flex;
   flex-grow: 1;
-  max-width: 842.5px;
-  width: 100%;
   border: 1px solid $gray-color;
   border-radius: 10px;
   flex-direction: column;
