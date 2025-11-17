@@ -5,7 +5,7 @@ import { useUsersStore } from "@/stores/useUsersStore";
 import ErrorBlock from "@/components/ui/ErrorBlock.vue";
 import BaseButton from "@/components/ui/BaseButton.vue";
 import UserCard from "@/pages/protectedPage/components/UserCard.vue";
-import UsersLoader from "@/components/loaders/UsersLoader.vue";
+import UsersLoader from "@/pages/protectedPage/components/UsersLoader.vue";
 
 const usersStore = useUsersStore();
 const { users, isLoading, errorMessage } = storeToRefs(usersStore);
@@ -17,7 +17,7 @@ onUnmounted(resetUsers);
 
 <template>
   <div class="protected-page">
-    <h2 class="protected-page__title">Защищенная страница</h2>
+    <div class="protected-page__title">Защищенная страница</div>
 
     <ErrorBlock v-if="errorMessage">
       {{ errorMessage }}
@@ -43,6 +43,8 @@ onUnmounted(resetUsers);
   padding: 60px 100px;
 
   &__title {
+    font-size: $font-size-header;
+    font-weight: $bold-font;
     text-align: center;
     margin-bottom: 20px;
   }

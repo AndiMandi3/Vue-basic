@@ -17,21 +17,21 @@ defineProps<IProps>();
   <div class="user-card">
     <div class="user-card__header">
       <img class="user-card__avatar" :src="user.avatar || AnonymousAvatar" alt="User avatar" loading="lazy">
-      <h4 class="user-card__name">{{ user.name }}</h4>
+      <div class="user-card__name">{{ user.name }}</div>
     </div>
 
     <LineDivider />
 
     <div class="user-card__info">
-      <div class="user-card__info-element">
+      <div class="user-card__element">
         <CalendarIcon />
         <p>{{ user.birthday }}</p>
       </div>
-      <div class="user-card__info-element">
+      <div class="user-card__element">
         <LocationIcon />
         <p>{{ user.city }}</p>
       </div>
-      <div class="user-card__info-element">
+      <div class="user-card__element">
         <PhoneIcon />
         <p>{{ user.phone }}</p>
       </div>
@@ -57,6 +57,10 @@ defineProps<IProps>();
     gap: 20px;
   }
 
+  &__name {
+    font-weight: $bold-font;
+  }
+
   &__avatar {
     border-radius: 50%;
     width: 48px;
@@ -67,11 +71,11 @@ defineProps<IProps>();
     display: flex;
     gap: 20px;
     padding: 20px 0;
+  }
 
-    &-element {
-      display: flex;
-      gap: 10px;
-    }
+  &__element {
+    display: flex;
+    gap: 10px;
   }
 }
 </style>

@@ -4,10 +4,12 @@ import ExclamationIcon from "@/assets/images/exclamation-icon.svg?component";
 
 <template>
   <div class="error-block">
-    <ExclamationIcon class="error-block__icon" />
-    <span class="error-block__text">
+    <div class="error-block__icon">
+      <ExclamationIcon />
+    </div>
+    <div class="error-block__content">
       <slot />
-    </span>
+    </div>
   </div>
 </template>
 
@@ -16,19 +18,15 @@ import ExclamationIcon from "@/assets/images/exclamation-icon.svg?component";
   display: flex;
   align-items: center;
   border-radius: 10px;
-  border: 2px solid;
+  border: 2px solid $danger-color;
   padding: 20px;
   margin-bottom: 20px;
   background-color: $danger-background-color;
-  border-color: $danger-color;
-
-  &__icon {
-    flex-shrink: 0;
-  }
-
-  &__text {
-    flex: 1;
-    text-align: center;
+  
+  &__content {
+    display: flex;
+    justify-content: center;
+    width: 100%;
   }
 }
 </style>

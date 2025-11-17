@@ -4,10 +4,12 @@ import InfoIcon from "@/assets/images/info-icon.svg?component";
 
 <template>
   <div class="info-block">
-    <InfoIcon class="info-block__icon" />
-    <p class="info-block__text">
+    <div class="info-block__icon">
+      <InfoIcon />
+    </div>
+    <div class="info-block__content">
       <slot />
-    </p>
+    </div>
   </div>
 </template>
 
@@ -15,16 +17,15 @@ import InfoIcon from "@/assets/images/info-icon.svg?component";
 .info-block {
   display: flex;
   border-radius: 10px;
-  border: 2px solid;
+  border: 2px solid $info-color;
+  gap: 15px;
   padding: 20px;
   margin-bottom: 20px;
+  background-color: $info-background-color;
 
-  &__icon {
-    flex-shrink: 0;
-  }
-
-  &__text {
-    flex: 1;
+  &__content {
+    display: flex;
+    width: 100%;
   }
 }
 </style>
